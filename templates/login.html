@@ -1,0 +1,389 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+{% if message %}
+<script type="text/javascript">
+alert("{{ message }}");
+{{message}} = "";</script>
+{% endif %}
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="referrer" content="no-referrer-when-downgrade"/>
+	<title>课室管理系统登录</title>
+	<link href="/static/work/js/bstable/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+</head>
+
+<body class="my-login-page">
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-md-center h-100">
+				<div class="card-wrapper">
+					<div class="brand">
+						<img src="{% static 'img/logo.png' %}" alt="logo">
+					</div>
+					{% comment %} 默认显示登录界面 {% endcomment %}
+					<div class="card fat">
+						<div class="card-body">
+							<h4 class="card-title" style="text-align: center">登录页面</h4>
+							<form method="POST" id="mys-login-validation" class="my-login-validation">
+								{% csrf_token %}
+								<div class="form-group">
+									<label for="username">账号</label>
+									<input id="login_username" type="text" class="form-control" name="username" value="" required autofocus>
+								</div>
+
+								<div class="form-group">
+									<label for="password">密码
+										<a href="#" class="float-right" id = "forget">忘记密码？</a>
+									</label>
+									<input id="login_password" type="password" class="form-control" name="password" value=""required data-eye>
+								</div>
+								<p class ="text-danger" id = "login_warn"></p>
+								<div class="form-group m-0">
+									<button type="submit" class="btn btn-primary btn-block" id="login">登录</button>
+								</div>
+								<p class ="text-danger"></p>
+								
+							</form>
+							<div class="form-group m-0">
+									<button type="submit" class="btn btn-default btn-block" id="signup">注册</button>
+							</div>
+						</div>
+					</div>
+					
+					<div class="footer">
+						中山大学课室管理系统 &mdash; 2019 
+					</div>
+				</div>
+			</div>
+		</div>
+		{% comment %} 遮罩弹窗注册 {% endcomment %}
+		<div class="grey-mask" id = "mask"></div>
+		{% comment %} 弹窗显示注册界面 {% endcomment %}
+		<div class="popup" id = "signup_popup" style="display: none;">
+			<div class="card fat">
+				<div class="card-body">
+					<h4 class="card-title" style="text-align: center">注册页面</h4>
+					<form method="POST" id="mys-signup-validation" class="my-login-validation">
+						{% csrf_token %}
+						<div class="form-group">
+							<label for="name">注册身份</label>
+							
+                                <select id="signup_type" class="form-control show-tick" required>
+                                    <option value = '0' id = 'student'>学生</option>
+                                    <option value = '1' id = 'teacher'>教师</option>
+                                </select>
+                            
+						</div>
+						<div class="form-group">
+							<label for="academy">请选择学院</label>
+							
+                                <select id="signup_academy" class="form-control show-tick" required>
+                                    <option value = '0'>资讯管理学院</option>
+                                </select>
+                            
+						</div>
+						<div class="form-group" id = "hide_major">
+							<label for="major">请选择专业</label>
+							
+                                <select id="signup_major" class="form-control show-tick" required>
+                                    <option value = '0'>图书馆专业</option>
+                                </select>
+                            
+						</div>
+						<div class="form-group" id = "change_username">
+							<label for="username">请输入姓名</label>
+							<input id="signup_name" type="text" class="form-control" name="username" value="" required autofocus>
+						</div>
+						<div class="form-group" id = "change_username">
+							<label for="username">请输入学号</label>
+							<input id="signup_username" type="text" class="form-control" name="username" value="" required autofocus>
+						</div>
+						<div class="form-group">
+							<label for="phone">请输入手机号码</label>
+							<input id="signup_phone" type="phone" class="form-control" name="password" value=""required data-eye>
+						</div>
+						<div class="form-group">
+							<label for="email">请输入邮箱</label>
+							<input id="signup_email" type="email" class="form-control" name="password" value=""required data-eye>
+						</div>
+						<div class="form-group">
+							<label for="password">请输入密码</label>
+							<input id="signup_password1" type="password" class="form-control" name="password" value=""required data-eye>
+						</div>
+						<div class="form-group">
+							<label for="password">请再次输入密码</label>
+							<input id="signup_password2" type="password" class="form-control" name="password" value=""required data-eye>
+						</div>
+
+						<p class ="text-danger" id = "signup_warn"></p>
+
+						<div class="form-group m-0">
+							<button type="submit" class="btn btn-warning btn-block" id="send_signup">发送邮件并注册</button>
+						</div>
+						<p class ="text-danger"></p>			
+						<div class="form-group m-0">
+							<button type="submit" class="btn btn-default btn-block" id="cancel_signup">取消注册</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		{% comment %} 弹窗显示重置密码 {% endcomment %}
+		<div class="popup" id = "reset_popup" style="display: none; z-index :1000;">
+			<div class="card fat">
+				<div class="card-body">
+					<h4 class="card-title" style="text-align: center">找回密码</h4>
+					<form method="POST" id="mys-reset-validation" class="my-login-validation">
+						{% csrf_token %}
+						<div class="form-group">
+							<label for="username">请输入学号或工号</label>
+							<input id="reset_username" type="text" class="form-control" name="username" value="" required autofocus>
+						</div>
+
+						<div class="form-group">
+							<label for="email">请输入邮箱</label>
+							<input id="reset_email" type="email" class="form-control" name="password" value=""required data-eye>
+						</div>
+
+						<div class="form-group">
+							<label for="password">请输入新密码</label>
+							<input id="reset_password1" type="password" class="form-control" name="password" value=""required data-eye>
+						</div>
+
+						<div class="form-group">
+							<label for="password">请再次输入新密码</label>
+							<input id="reset_password2" type="password" class="form-control" name="password" value=""required data-eye>
+						</div>
+
+						<p class ="text-danger" id = "reset_warn"></p>
+
+						<div class="form-group m-0" id="send">
+							<button type="submit" class="btn btn-warning btn-block" id="send_reset">发送邮件确认重置</button>
+						</div>
+						<p class ="text-danger"></p>			
+						<div class="form-group m-0" id="cancel-send">
+							<button type="submit" class="btn btn-default btn-block" id="cancel_reset">取消重置</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="/static/work/js/jquery/jQuery-2.2.0.min.js"></script>
+	<script src = "/static/bootstrap/js/bootstrap.bundle.js" ></script>
+	<script src = "/static/bootstrap/js/bootstrap.bundle.min.js" ></script>
+	<script src="/static/work/js/bstable/js/bootstrap.min.js"></script>
+    <script>
+		var _academy = "";
+		var _major = "";
+		{% autoescape off %}
+		var academies = {{ academies }};
+		var majors = {{ majors }};
+		for (major in majors){
+			_major += "<option>" + majors[major] + "</option>";
+		}
+		for (academy in academies){
+			_academy += "<option>" + academies[academy] + "</option>";
+		}
+     	{% endautoescape %}
+    	function getCookie(name) {
+    		var cookieValue = null;
+    		if (document.cookie && document.cookie !== '') {
+        		var cookies = document.cookie.split(';');
+        		for (var i = 0; i < cookies.length; i++) {
+            		var cookie = cookies[i].trim();
+            		if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                		cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                		break;
+           			}
+        		}
+    		}
+    		return cookieValue;
+		}
+		{% comment %} 登录时变量 {% endcomment %}
+		$("#login_username").bind("click",function(){
+			$("#login_warn").text("");
+		})
+
+		$("#login_password").bind("click",function(){
+			$("#login_warn").text("");
+		})
+
+		$("#login").bind("click",function(){
+			
+    		$.ajax({
+    			type : 'post',
+    			cache : false,
+    			url :  "{% url 'login' %}",
+    			data : {
+    				'csrfmiddlewaretoken' : getCookie('csrftoken'),
+    				'username' : $("#login_username").val(),
+    				'password' : $("#login_password").val(),
+    			},
+    			success : function(data){
+    				if (data['status'] == 'error'){
+    					$("#login_warn").text(data['message']);
+    				}
+    				else
+    					window.location.href = "{% url 'homepage' %}";
+    			}
+    		})
+    		return false;
+    	})
+		{% comment %} 注册时变量 {% endcomment %}
+		$("#signup_academy").html(_academy);
+		$("#signup_major").html(_major);
+		
+		$("#signup_username").bind("click",function(){
+			$("#signup_warn").text("");
+		})
+
+		$("#signup_name").bind("click",function(){
+			$("#signup_warn").text("");
+		})
+
+		$("#signup_password1").bind("click",function(){
+			$("#signup_warn").text("");
+		})
+
+		$("#signup_password2").bind("click",function(){
+			$("#signup_warn").text("");
+		})
+
+		$("#signup_email").bind("click",function(){
+			$("#signup_warn").text("");
+		})
+
+		$("#signup_name").bind("click",function(){
+			$("#signup_warn").text("");
+		})
+
+		$("#signup_phone").bind("click",function(){
+			$("#signup_warn").text("");
+		})
+
+		$("#signup_academy").bind("click",function(){
+			$("#signup_warn").text("");
+		})
+
+		$("#signup_major").bind("click",function(){
+			$("#signup_warn").text("");
+		})
+
+		{% comment %} 显示注册弹窗 {% endcomment %}
+		$("#signup").bind("click", function(){
+			$("#hide_major").show();
+			$("#change_username").children("label").text("请输入学号");
+			$('#mask').show();
+			$('#signup_popup').show();
+		});
+
+		$("#teacher").bind('click', function(){
+			$("#hide_major").hide();
+			$("#change_username").children("label").text("请输入工号");
+		});
+
+		{% comment %} 注册 {% endcomment %}
+		$('#send_signup').bind("click", function(){
+			if($("#signup_password1").val()==$("#signup_password2").val()){
+				$.ajax({
+				type:'post',
+				cach: false,
+				url : "{% url 'signup' %}",
+				data : {
+					'csrfmiddlewaretoken' : getCookie('csrftoken'),
+    				'username' : $("#signup_username").val(),
+    				'password' : $("#signup_password1").val(),
+					'email' : $('#signup_email').val(),
+					'phone' : $("#signup_phone").val(),
+					'type' : $("#signup_type option:selected").attr("value"),
+					'major' : $("#signup_major option:selected").text(),
+					'academy' : $("#signup_academy option:selected").text(),
+					'name' : $("#signup_name").val(),
+				},
+				success : function(data){
+					if(data['status'] == 'error'){
+						$("#signup_warn").text(data['message']);
+					}
+					else
+						alert("请前往邮箱确认注册并登陆~");
+						$('#mask').hide();
+						$('#signup_popup').hide();
+					}
+				})
+			}
+			else{
+				$('#signup_warn').text("前后两次密码输入不同！");
+			}
+			return false;
+
+			
+		})
+
+		{% comment %} 取消注册 {% endcomment %}
+		$('#cancel_signup').bind("click", function(){
+			$('#mask').hide();
+			$('#signup_popup').hide();
+			$('#signup_warn').text("");
+			$('#signup_username').text("");
+			$('#signup_password1').text("");
+			$('#signup_password2').text("");
+			$('#signup_email').text("");
+		})
+
+		{% comment %} 显示重置密码弹窗 {% endcomment %}
+		$('#forget').bind("click", function(){
+			$('#mask').show();
+			$('#reset_popup').show();
+		})
+
+		{% comment %} 取消重置密码 {% endcomment %}
+		$('#cancel_reset').bind("click", function(){
+			$('#mask').hide();
+			$('#reset_popup').hide();
+			$('#reset_warn').text("");
+			$('#reset_username').text("");
+			$('#reset_password1').text("");
+			$('#reset_password2').text("");
+			$('#reset_email').text("");
+		})
+
+		{% comment %} 重置密码 {% endcomment %}
+		$('#send_reset').bind("click", function(){
+			if($("#reset_password1").val()==$("#reset_password2").val()){
+				$.ajax({
+				type:'post',
+				cach: false,
+				url : "{% url 'reset_password' %}",
+				data : {
+					'csrfmiddlewaretoken' : getCookie('csrftoken'),
+    				'username' : $("#reset_username").val(),
+    				'password' : $("#reset_password1").val(),
+					'email' : $('#reset_email').val(),
+				},
+				success : function(data){
+					if(data['status'] == 'error'){
+						$("#reset_warn").text(data['message']);
+					}
+					else{
+						$("#reset_warn").text(data['message']);
+						alert("请前往邮箱确认重置密码~");
+						$('#mask').hide();
+						$('#reset_popup').hide();
+					}
+				}
+			})
+			}
+			else{
+				$('#reset_warn').text("前后两次密码输入不同！");
+			}
+			return false;
+		})
+    </script>
+
+</body>
+</html>

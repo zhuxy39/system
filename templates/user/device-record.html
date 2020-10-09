@@ -1,0 +1,216 @@
+﻿<!doctype html>
+<html class="no-js " lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>课室管理系统</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<!-- Favicon-->
+<link rel="stylesheet" href="/static/assets/plugins/bootstrap/css/bootstrap.min.css">
+<!-- Bootstrap Datetime Picker Css -->
+
+
+<link href="/static/assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+<!-- Wait Me Css -->
+<link href="/static/assets/plugins/waitme/waitMe.css" rel="stylesheet" />
+<!-- Bootstrap Select Css -->
+<link href="/static/assets/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+<!-- Custom Css -->
+<link  rel="stylesheet" href="/static/assets/css/main.css">
+<link rel="stylesheet" href="/static/assets/css/color_skins.css">
+
+
+</head>
+<body class="theme-orange">
+    <div class="page-loader-wrapper">
+            <div class="loader">        
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <p>Please wait...</p>
+                <div class="m-t-30"><img src="/static/assets/images/logo.svg" width="48" height="48" alt="Nexa"></div>
+            </div>
+    </div>
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div><!-- Search  -->
+    <div class="search-bar">
+        <div class="search-icon"> <i class="material-icons">search</i> </div>
+        <input type="text" placeholder="Explore Nexa...">
+        <div class="close-search"> <i class="material-icons">close</i> </div>
+    </div>
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="col-12">
+            
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="/homepage/">课室管理系统</a>
+            </div>
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a></li>
+    
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <!-- 登出 -->
+                <li><a href="/logout/" class="mega-menu" data-close="true"><i class="zmdi zmdi-power"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Left Sidebar -->
+    <aside id="leftsidebar" class="sidebar">
+        <!-- User Info -->
+        <div class="user-info">
+            <div class="image">
+                <img src="/static/assets/images/xs/avatar1.jpg" width="48" height="48" alt="User" />
+            </div>
+            <div class="info-container">
+                <div class="name" data-toggle="dropdown">{{ member.name }}</div>
+                <div class="email">{{ member.user.email }}</div>
+            </div>
+        </div>
+    <!-- #User Info --> 
+    <!-- Menu -->
+    <div class="menu">
+            <ul class="list">
+                <li class="header">导航栏</li>
+                <li class="active open"> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-home"></i><span>用户功能</span></a>
+                    <ul class="ml-menu">
+                        <li ><a href="/">个人中心</a> </li>
+                        <li class="active"><a href="/search_classroom_page/">课室查询</a></li>
+                        <li><a href="/application/">课室申请</a></li>
+                        <li><a href="/repair_message_submit/">设备故障报修</a></li>
+                        <li><a href="/multimedia_demand_submit/">设备申请</a></li>
+                        <li><a href="/device_record/">设备申请记录</a></li>
+                   
+                    </ul>
+                </li>         
+    
+                
+            </ul>
+        </div>
+    <!-- #Menu --> 
+</aside>  
+
+<!-- Main Content -->
+<section class="content">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i>课室管理系统</a></li>
+                    <li class="breadcrumb-item active">设备申请记录</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>设备申请记录
+                </h2>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <!-- Basic Table -->
+        <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2> 设备申请记录表格</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more-vert"></i> </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);">Action</a></li>
+                                        <li><a href="javascript:void(0);">Another action</a></li>
+                                        <li><a href="javascript:void(0);">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>申请单编号</th>
+                                        <th>设备类型</th>
+                                        <th>设备名称</th>
+                                        <th>设备数量</th>
+                                        <th>所在教室</th>
+                                        <th>需求日期</th>
+                                        <th>起始节数</th>
+                                        <th>结束节数</th>
+                                        <th>申请原因</th>
+                                        <th>申请状态</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Basic Table --> 
+        
+    </div>
+</section>
+
+<script src="/static/js/jquery-3.3.1.min.js"></script> 
+<script>
+
+$(function(){
+      $.ajax({
+        type:'get',
+        cache : false,
+        url:"/get_device_apply_info/",
+        success:function(data){
+            for(i=0; i<data.info.length;i++){
+                var newHTML = [ 
+                                '<td>' + data.info[i][0] + '</td>',  //申请单编号
+                                '<td>' + data.info[i][1] + '</td>',
+                                '<td>' + data.info[i][2] + '</td>',
+                                '<td>' + data.info[i][3] + '</td>',
+                                '<td>' + data.info[i][4] + '</td>',
+                                '<td>' + data.info[i][5] + '</td>',
+                                '<td>' + data.info[i][6] + '</td>',
+                                '<td>' + data.info[i][7] + '</td>',
+                                '<td>' + data.info[i][8] + '</td>',
+                                '<td>' + data.info[i][9] + '</td>',
+                            ].join(' ');
+                $("#tbody").append("<tr>" + newHTML + "</tr>");
+               // var oldHTML = document.getElementById("tbody").innerHTML;
+               // document.getElementById("tbody").innerHTML = oldHTML + newHTML;
+            }
+        },
+        error:function(err){
+            alert("err:" + err);
+        }
+
+    })
+})
+  
+
+
+</script>
+
+
+<!-- Jquery Core Js --> 
+
+<script src="/static/assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
+<script src="/static/assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
+
+<script src="/static/assets/plugins/autosize/autosize.js"></script> <!-- Autosize Plugin Js --> 
+<script src="/static/assets/plugins/momentjs/moment.js"></script> <!-- Moment Plugin Js --> 
+<!-- Bootstrap Material Datetime Picker Plugin Js --> 
+<script src="/static/assets/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script src="/static/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script> 
+
+<script src="/static/assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js --> 
+<script src="/static/assets/js/pages/forms/basic-form-elements.js"></script> 
+</body>
+</html>

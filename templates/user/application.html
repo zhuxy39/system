@@ -1,0 +1,302 @@
+﻿<!doctype html>
+<html class="no-js " lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>课室管理系统</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<!-- Favicon-->
+<link  rel="stylesheet" href="/static/assets/plugins/bootstrap/css/bootstrap.min.css">
+<!-- Bootstrap Select Css -->
+<link rel="stylesheet" href="/static/assets/plugins/bootstrap-select/css/bootstrap-select.css" />
+<!-- Custom Css -->
+<link rel="stylesheet" href="/static/assets/css/main.css">
+<link rel="stylesheet" href="/static/assets/css/color_skins.css">
+<link href="/static/assets/css/dcalendar.picker.css" rel="stylesheet">
+<style>
+.btn{
+	padding:0.6rem 1rem;
+}
+</style>
+</head>
+<body class="theme-orange">
+    <div class="page-loader-wrapper">
+            <div class="loader">        
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <p>Please wait...</p>
+                <div class="m-t-30"><img src="/static/assets/images/logo.svg" width="48" height="48" alt="Nexa"></div>
+            </div>
+    </div>
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div><!-- Search  -->
+    <div class="search-bar">
+        <div class="search-icon"> <i class="material-icons">search</i> </div>
+        <input type="text" placeholder="Explore Nexa...">
+        <div class="close-search"> <i class="material-icons">close</i> </div>
+    </div>
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="col-12">
+            
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="index.html">课室管理系统</a>
+            </div>
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a></li>
+    
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <!-- 登出 -->
+                <li><a href="/logout/" class="mega-menu" data-close="true"><i class="zmdi zmdi-power"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Left Sidebar -->
+    <aside id="leftsidebar" class="sidebar">
+        <!-- User Info -->
+        <div class="user-info">
+            <div class="image">
+                <img src="/static/assets/images/xs/avatar1.jpg" width="48" height="48" alt="User" />
+            </div>
+            <div class="info-container">
+                <div class="name" data-toggle="dropdown">{{name}}</div>
+                <div class="email">{{email}}</div>
+            </div>
+        </div>
+    <!-- #User Info --> 
+    <!-- Menu -->
+    <div class="menu">
+            <ul class="list">
+                <li class="header">导航栏</li>
+                <li class="active open"> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-home"></i><span>用户功能</span></a>
+                    <ul class="ml-menu">
+                        <li ><a href="/">个人中心</a> </li>
+                    <li class="active"><a href="/search_classroom_page/">课室查询</a></li>
+                    <li><a href="/application/">课室申请</a></li>
+                    <li><a href="/repair_message_submit/">设备故障报修</a></li>
+                    <li><a href="/multimedia_demand_submit/">设备申请</a></li>
+                    <li><a href="/device_record/">设备申请记录</a></li>
+                   
+                    </ul>
+                </li>         
+    
+                
+            </ul>
+        </div>
+    <!-- #Menu --> 
+</aside>  
+
+
+<section class="content">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>课室管理</h2>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> 课室管理系统</a></li>
+                    <li class="breadcrumb-item active">课室申请</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+ 
+        <!-- Input Group -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2> 课室借用申请 </h2>
+                        <ul class="header-dropdown m-r--5">
+                            <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more-vert"></i> </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="javascript:void(0);">Action</a></li>
+                                    <li><a href="javascript:void(0);">Another action</a></li>
+                                    <li><a href="javascript:void(0);">Something else here</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+                        <h2 class="card-inside-title">申请人信息</h2>
+                        <div class="row clearfix">
+							<div class="col-lg-4 col-md-6 col-sm-12"><b>申请人</b>
+                                <div class="input-group"> <span class="input-group-addon"> <i class="material-icons">person</i> </span>
+                                    <div class="form-line">
+                                        <input id="applicant" type="text" class="form-control date" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12"><b>申请人邮箱</b>
+                                <div class="input-group"> <span class="input-group-addon"> <i class="material-icons">person</i> </span>
+                                    <div class="form-line">
+                                        <input id="email" type="text" class="form-control date" required>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="col-lg-4 col-md-6 col-sm-12"><b>申请负责老师</b>
+                                <select id="teachers" class="form-control show-tick" required>
+                                </select>
+								
+                            </div>
+                        </div>
+                        <h2 class="card-inside-title">申请活动信息</h2>
+                        <div class="row clearfix">
+							<div class="col-lg-4 col-md-6"> <b>申请使用时间</b>
+                                <div class="input-group"> <span class="input-group-addon"> <i class="material-icons">date_range</i> </span>
+                                    <div class="form-line">
+										<input id="mydatepicker" type="text" class="form-control date" required>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="col-lg-4 col-md-6"> 
+								<select id="time_select" class="form-control show-tick" multiple required>
+                                    <optgroup label="申请时间段（请选择开始时间与结束时间）" data-max-options="2">
+                                    <option>第1节</option>
+                                    <option>第2节</option>
+                                    <option>第3节</option>
+									<option>第4节</option>
+									<option>第5节</option>
+									<option>第6节</option>
+									<option>第7节</option>
+									<option>第8节</option>
+									<option>第9节</option>
+									<option>第10节</option>
+                                    </optgroup>
+								</select>
+							</div>
+							<div class="col-lg-4 col-md-6 col-sm-12"><b>申请事由</b>
+                                <div class="input-group"> 
+                                    <div class="form-line">
+                                        <input id="apply_reason" type="text" class="form-control date" required>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="col-lg-4 col-md-6"><b>人数规模</b>
+                                <select id="size" class="form-control show-tick" required>
+                                    <option value = '20'>20人</option>
+                                    <option value = '50'>50人</option>
+                                    <option value = '80'>80人</option>
+									<option value = '100'>100人</option>
+									<option value = '120'>120人</option>
+									<option value = '200'>200人</option>
+                                </select>
+                            </div>
+							<div class="col-lg-4 col-md-6"><b>课室类型</b>
+                                <select id="type" class="form-control show-tick" required>
+                                    <option value="0">普通课室</option>
+                                    <option value="1">多媒体课室</option>
+                                    <option value="2">多媒体互动录播课室</option>
+                                </select>
+                            </div>
+						</div>
+                    </div>
+					<button id="btn" type="button" class="btn  btn-raised bg-amber waves-effect" style="display:block; margin:0 auto;">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Jquery Core Js --> 
+<script>window.jQuery || document.write('<script src="/static/assets/js/jquery-1.11.0.min.js"><\/script>')</script>
+<script type="text/javascript" src="/static/assets/js/dcalendar.picker.js"></script>
+<script type="text/javascript" src="/static/assets/js/time_select.js"></script>
+{% csrf_token %}
+<script>
+    function getCookie(name) {
+    		var cookieValue = null;
+    		if (document.cookie && document.cookie !== '') {
+        		var cookies = document.cookie.split(';');
+        		for (var i = 0; i < cookies.length; i++) {
+            		var cookie = cookies[i].trim();
+            		if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                		cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                		break;
+           			}
+        		}
+    		}
+    		return cookieValue;
+		}
+//载入用户信息
+    {% autoescape off %}
+    var user_info = {{ user_info }};
+    $("#applicant").val(user_info.name);
+    $("#email").val(user_info.email);
+    var teachers = {{ academy_teachers }};
+     {% endautoescape %}
+    var _html = "";
+    //载入学院老师信息
+    $(teachers).each(function(index){
+        var teacher = teachers[index];
+        //<option value = 'account'>张老师，123456</option>
+        _html +="<option value='" + teacher.teacher_account + "'>" + teacher.teacher_name + "老师，工号：" + teacher.teacher_account + "</option>";
+    });
+    $("#teachers").html(_html);
+	$("#btn").bind("click",function(){//点击提交按钮将所有信息发送到后台
+		var options = $("#time_select option:selected");
+		var start="";
+		var end="";
+		var assistantName = "";
+		if(options.length>0)
+			for (var i=0;i<options.length;i++){
+				assistantName += options[i].text;
+             }
+		start=assistantName.substr(1,1);//获得申请开始节数
+		end=assistantName.substr(4,1);//获得申请结束节数
+        var responsible_teacher = $("#teachers option:selected").val();
+        var date = $("#mydatepicker").val();
+        var size = $("#size option:selected").attr("value");
+        var type = $("#type option:selected").attr("value");
+        var reason = $("#apply_reason").val();
+        if(start && end && date && size && reason && responsible_teacher){
+            $.ajax({
+                type:"post",
+                url:"/apply_classroom/",
+                data:{
+                    'csrfmiddlewaretoken' : getCookie('csrftoken'),
+                    'responsible_teacher': responsible_teacher,
+                    'date': date,
+                    'start_section':start,
+                    'end_section':end,
+                    'size':size,
+                    'type':type,
+                    'apply_reason':reason,
+                },
+                success:function(data){
+                    alert("您已成功提交申请，可在个人页面查看申请进程！");
+                },
+                error:function(err){
+                    alert("出现异常！");
+                }
+		    })
+        }
+        else{
+            alert("输入有误！");
+        }
+		
+	});
+</script>
+
+<script src="/static/assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
+<script src="/static/assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
+
+<!--script src="/static/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script--> <!-- Bootstrap Colorpicker Js --> 
+<!--script src="/static/assets/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script--> <!-- Input Mask Plugin Js --> 
+<!--script src="/static/assets/plugins/multi-select/js/jquery.multi-select.js"></script--> <!-- Multi Select Plugin Js --> 
+<!--script src="/static/assets/plugins/jquery-spinner/js/jquery.spinner.js"></script--> <!-- Jquery Spinner Plugin Js --> 
+<!--script src="/static/assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script--> <!-- Bootstrap Tags Input Plugin Js --> 
+<!--script src="/static/assets/plugins/nouislider/nouislider.js"></script--> <!-- noUISlider Plugin Js --> 
+
+<script src="/static/assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js --> 
+<!--script src="/static/assets/js/pages/forms/advanced-form-elements.js"></script--> 
+</body>
+</html>

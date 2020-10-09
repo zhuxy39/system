@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
+    <title></title>
+    <link href="/static/work/js/bstable/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <style>
+        .th th{background-color: #e9dfd7 !important;}
+    </style>
+</head>
+<body">
+    <h4 style="text-align: center;">{{ apply.id }}号申请单</h4>
+    <table class="table table-bordered" style="table-layout: fixed;">
+        <tr style="font-size: 14px">
+            <td colspan="4">需求设备类型</td>
+            <td colspan="6"><p>&nbsp;&nbsp;{{ apply.type }}</p>
+            </td>
+        </tr>
+        <tr style="font-size: 14px">
+            <td colspan="4">需求设备名称</td>
+            <td colspan="6"><p>&nbsp;&nbsp;{{ apply.device_name }}</p>
+            </td>
+        </tr>
+       <tr style="font-size: 14px">
+            <td colspan="4">需求设备数量</td>
+            <td colspan="6"><p>&nbsp;&nbsp;{{ apply.apply_quatity }}件</p>
+            </td>
+        </tr>
+        <tr style="font-size: 14px">
+            <td colspan="4">需求日期</td>
+            <td colspan="6"><p>&nbsp;&nbsp;{{ apply.use_date }}</p>
+            </td>
+        </tr>
+        <tr style="font-size: 14px">
+            <td colspan="4">需求节数</td>
+            <td colspan="6"><p>&nbsp;&nbsp;{{ apply.apply_section_begin }} - {{ apply.apply_section_end }}</p>
+            </td>
+        </tr>
+        <tr style="font-size: 14px">
+            <td colspan="4">需求教室</td>
+            <td colspan="6"><p>&nbsp;&nbsp;{{ apply.classroom.classroom_id }}</p>
+            </td>
+        </tr>
+    </table>
+</body>
+
+<script src="/static/work/js/jquery/jQuery-2.2.0.min.js"></script>
+<script>
+    function Cancel() {
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+    }
+</script>
+</html>

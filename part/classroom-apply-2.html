@@ -1,0 +1,265 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
+    <title></title>
+    <link href="/static/work/js/bstable/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/work/js/bstable/css/bootstrap-table.css" rel="stylesheet" type="text/css">
+    
+    <link href="/static/work/css/table.css" rel="stylesheet" type="text/css">
+</head>
+<body style="background-color: #ecf0f5;font-family: 微软雅黑;color: #475059;min-width: 1000px;overflow: auto">
+<div class="notice_main">
+    <!--
+    <h6>表格一</h6>
+    <div style="border-bottom: 1px #ccc solid;padding-bottom: 8px">
+        <p style="line-height: 24px;font-size: 14px;padding: 4px 0 0 36px ;color:#bb8940;background-image: url(img/ts_03.png);background-repeat: no-repeat;background-position: 10px 8px;font-weight: bold">温馨提示</p>
+        <ul class="ts">
+            <li><span>*</span>该页面主要显示的是表格一的类容。</li>
+            <li><span>*</span>该页面主要显示的是表格一的类容。</li>
+        </ul>
+    </div>
+    -->
+    <div class="notice_check">
+    
+        <!-- 选择搜索项  -->
+        <div class="btn-group l_left" style="margin-right: 4px">
+            <button type="button" class="btn btn-default change" style="height: 30px;line-height: 30px;padding: 0 12px !important;font-size: 12px">选择搜索项</button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height: 30px;line-height: 30px">
+                <span class="caret"></span>
+                <span class="sr-only"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li value = "apply_id">按申请编号搜索</li>
+                <li value = "applicant">按申请人搜索</li>
+                <li value = "apply_head_1">按初审人搜索</li>
+            </ul>
+        </div>
+        <button class="check_btn" id = "check">查询</button>
+        <div class="l_left">
+            <input type="text" class="find_input">
+        </div>
+    </div>
+    <div>
+        <table id="table" class = "table_style" style="margin: 0 auto" >
+        </table>
+    </div>
+</div>
+{% comment %} 展示申请理由 {% endcomment %}
+    <div class="modal fade" id="apply_reason" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content" >
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">课室申请理由</h4>
+                </div>
+                <div class="modal-body">
+                    <p id = "reason_detail"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% comment %} 拒绝申请理由 {% endcomment %}
+    <div class="modal fade" id="refuse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">拒绝申请理由</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="classroom_id">请填写理由</label>
+                    <input type="text" class="form-control" id="refuse_reason">
+                    <p></p>
+                    <p><span class="pull-left text-danger"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="confirm_refuse">确认提交</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% comment %} 提示框 {% endcomment %}
+    <div class="modal fade" id="warnform" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">提醒框</h4>
+                </div>
+                <div class="modal-body" id="warn"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="/static/work/js/jquery/jQuery-2.2.0.min.js"></script>
+<script src="/static/work/js/bstable/js/bootstrap.min.js"></script>
+<script src="/static/work/js/bstable/js/bootstrap-table.js"></script>
+<script src="/static/work/js/bstable/js/bootstrap-table-zh-CN.min.js"></script>
+<script src="/static/work/js/layer_v2.1/layer/layer.js"></script>
+<script type="text/javascript">
+    var _table, device_table, avaliable_classroom_table;
+    var search_type, search_word;
+    $(function () {
+        change();
+        _table = $("#table").bootstrapTable({
+            columns: [
+                { checkbox: true },
+                { title: '申请编号', field : 'classroom_apply_id'},
+                { title: '申请人', field : 'applicant_id'},
+                { title: '申请时间', field : 'apply_time'},
+                { title: '需求节数（起）', field : 'apply_section_begin'},
+                { title: '需求节数（止）', field : 'apply_section_end'},
+                { title: '需求时间', field : 'apply_date'},
+                { title: '需求规模', field : 'apply_size'},
+                { title: '需求类型', field : 'apply_category'},
+                { title: '初审通过时间', field : 'pass_time_1'},
+                { title: '初审人', field : 'apply_head_1'},
+                {
+                    title: '需求理由', 
+                    field: 'apply_reason', 
+                    formatter: function (value, row, index) {
+                        var html = '<a href="#" onclick="apply_reason(this)">查看详情</a>';
+                        return html;
+                    }
+                },
+                {
+                    title: '操作', 
+                    field: 'operate', 
+                    formatter: function (value, row, index) {
+                        var _html = '<a href="#" onclick="pass(this)">通过申请</a>';
+                        _html += '<a href="#" onclick="refuse(this)">拒绝申请</a>';
+                        return _html;
+                    }
+                }
+            ],
+            url : '/apply_classroom_list_1/',
+            cache : false,
+            method : 'get',
+            queryParamsType: '',
+            queryParams: queryParams,
+            pagination: true,
+            pageNumber: 1,
+            pageSize: 10,
+            pageList: [10, 20, 50],
+            sidePagination: "server",
+            pageNumber: 1,
+            search: false, //显示搜索框
+            uniqueId: "apply_id",
+            paginationPreText: "上一页",
+            paginationNextText: "下一页",  
+        });
+    });
+
+    function change(){
+        $(".dropdown-menu>li").click(function(){
+            $(this).parent().siblings(".change").html($(this).html());
+            search_type = $(this).attr("value");
+        })
+        
+    }
+
+    
+
+    function queryParams(params) {
+
+        return {
+            pageSize: params.pageSize,
+            pageIndex: params.pageNumber,
+            search_word : search_word,
+            search_type : search_type,
+        };
+    }
+
+    $("#check").bind('click',function(){
+        _table.bootstrapTable('refresh',{'pageNumber' : 1});
+        return false;
+    });
+
+    function apply_reason(e){
+        var apply_classroom_id = $(e).parent().siblings(":eq(1)").text();
+        $.ajax({
+            url : '/classroom_apply_reason/' + apply_classroom_id + '/',
+            cache : false,
+            type : 'get',
+            success : function(data){
+                $("#reason_detail").text(data['reason']);
+                $("#apply_reason").modal('show');
+            }
+        });
+    }
+
+
+    function pass(e){
+        alert("确认通过申请？");
+        var apply_classroom_id = $(e).parent().siblings(":eq(1)").text();
+        $.ajax({
+            url : '/pass_classroom_apply_2/' + apply_classroom_id +'/',
+            cache : false,
+            type : 'get',
+            data : {
+                'apply_classroom_id' : apply_classroom_id,
+            },
+            success : function(data){
+                $("#warn").text('申请编号: '+ data['classroom_apply_id'] + ', ' + data['message'] + ', 审批人: ' + data['apply_head_2'] );
+                $("#warnform").modal('show');   
+            }
+        })
+    }
+
+    function detail(e){
+        var classroom_id = $(e).parent().siblings(":eq(1)").text();
+        $.ajax({
+            url : '/classroom_detail/' + classroom_id +'/',
+            cache : false,
+            type : 'get',
+            data : {
+            },
+            success : function(data){
+                
+            }
+        })
+    }
+    var refuse_id;
+    function refuse(e){
+        refuse_id = $(e).parent().siblings(":eq(1)").text();
+        $("#refuse").modal('show');
+        
+    }
+
+    $("#confirm_refuse").bind('click', function(){
+        alert("确认拒绝该申请？");
+        $.ajax({
+            url : '/refuse_classroom_apply/' + refuse_id + '/',
+            cache : false,
+            type : 'get',
+            data : {
+                'refuse_reason' : $("#refuse_reason").val(),
+                'classroom_apply_id' : refuse_id,
+            },
+            success : function(data){
+                $("#refuse").modal('hide');
+                $("#refuse_reason").text("");
+                $("#warn").text('申请编号: '+ data['classroom_apply_id'] + ', ' + data['message']);
+                $("#warnform").modal('show');   
+                _table.bootstrapTable('refresh',{'pageNumber' : 1});
+            }
+        });
+        return false;
+    })
+
+
+
+</script>
+
+</body>
+</html>

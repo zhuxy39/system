@@ -1,0 +1,271 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
+    <title></title>
+    <link href="/static/work/js/bstable/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/work/js/bstable/css/bootstrap-table.css" rel="stylesheet" type="text/css">
+    <link href="/static/work/css/table.css" rel="stylesheet" type="text/css">
+</head>
+<body style="background-color: #ecf0f5;font-family: 微软雅黑;color: #475059;min-width: 1150px;overflow: auto">
+<div class="notice_main ">
+    <div class="notice_check" style="padding: 16px 15px 8px 15px">
+        <p>
+            <label class="">设备编号：</label>
+            <input type="text" class="find_input" id = "id">
+            <label class="">设备名称：</label>
+            <select class="find_input" id = "name">
+                <option value="投影仪">投影仪</option>
+                <option value="带线麦">带线麦</option>
+                <option value="无线麦">无线麦</option>
+                <option value="投影笔">投影笔</option>
+                <option value="折叠椅">折叠椅</option>
+                <option value="折叠桌">折叠桌</option>
+                <option value="音箱">音箱</option>
+            </select>
+        </p>
+    </div>
+    <div class="notice_check  notice_check_last">
+        <p class="l_left">
+            <label class="">设备类型：</label>
+            <select class="find_input" id = "device_type">
+                <option value="0">多媒体</option>
+                <option value="1">桌椅</option>
+                <option value="2">其他</option>
+            </select>
+            <label class="">可用状态：</label>
+            <select class="find_input" id = "device_status">
+                <option value="2">全部</option>
+                <option value="1">可用</option>
+                <option value="0">不可用</option>
+            </select>
+
+            <label class="">查询方式：</label>
+            <div class="btn-group l_left" style="margin-right: 4px">
+                <button type="button" class="btn btn-default change" style="height: 30px;line-height: 30px;padding: 0 12px !important;font-size: 12px">全部设备信息</button>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height: 30px;line-height: 30px">
+                    <span class="caret"></span>
+                    <span class="sr-only"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li value='all'>全部设备信息</li>
+                    <li value='id'>按设备编号查询</li>
+                    <li value='type'>按设备类型查询</li>
+                    <li value='name'>按设备名称查询</li>
+                </ul>
+            </div>
+           
+            <button class="check_btn">查询</button>
+        </p>
+        <div class="notice_nav r_right">
+            <a class="btn btn-default" onclick="add()"><span class="glyphicon glyphicon-plus"></span>新增</a>
+            <a class="btn btn-default" onclick="delete_()"><span class="glyphicon glyphicon-remove"></span>删除</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <table id="table" class="table_style" style="margin: 0 auto" > </table>
+</div>
+
+    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">添加设备</h4>
+                </div>
+                <div class="modal-body"> 
+                        <label class="">设备类型:</label>
+                        <select class="find_input" id = "add_device_type">
+                            <option value="0">多媒体</option>
+                            <option value="1">桌椅</option>
+                            <option value="2">其他</option>
+                        </select>
+                        <p style="margin-bottom: 3px"></p>
+                        <label class="">设备名称:</label>
+                        <select class="find_input" id = "add_device_name">
+                            <option value="投影仪">投影仪</option>
+                            <option value="带线麦">带线麦</option>
+                            <option value="无线麦">无线麦</option>
+                            <option value="投影笔">投影笔</option>
+                            <option value="折叠椅">折叠椅</option>
+                            <option value="折叠桌">折叠桌</option>
+                            <option value="音箱">音箱</option>
+                        </select>
+                        <p style="margin-bottom: 3px"></p>
+                        <label class="">存储位置:</label>
+                        <input type="text" class="find_input" id = "add_device_location">
+                        <p style="margin-bottom: 5px;padding-bottom: 5px; border-bottom: 1px "></p>
+                        <label class="">是否可移动:</label>
+                        <input type="radio" name="stable" value="1"> 可移动
+                        <input type="radio" name="stable" value="0"> 不可移动
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="comfirm">确定添加</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">添加设备</h4>
+                </div>
+                <div class="modal-body">是否确定删除这些设备记录</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="comfirm_delete">确定删除</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="warnform" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">提醒框</h4>
+                </div>
+                <div class="modal-body" id="warn"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+<script src="/static/work/js/bstable/js/bootstrap.min.js"></script>
+<script src="/static/work/js/bstable/js/bootstrap-table.js"></script>
+<script src="/static/work/js/bstable/js/bootstrap-table-zh-CN.min.js"></script>
+<script src="/static/work/js/layer_v2.1/layer/layer.js"></script>
+<script type="text/javascript">
+    var _table, select_type = 'all'; 
+    function change(){
+       $(".dropdown-menu>li").click(function(){
+           $(".change").html($(this).html());
+           select_type = $(this).attr('value');
+       });
+    }
+
+    $(".check_btn").bind('click',function(){
+        _table.bootstrapTable("refreshOptions",{pageNumber:1});
+        $("#id").val("");
+        return false;
+    })
+
+    $(function () {
+        change();
+        _table = $("#table").bootstrapTable({
+            columns: [
+                { checkbox: true },
+                { title: '设备编号', field : 'device_id'},
+                { title: '设备类型', field: 'device_type' },
+                { title: '设备名称', field: 'device_name' },
+                { title: '可用状态', field: 'status' },
+                { title: '存储位置', field: 'location' },
+                { title: '负责人工号', field: 'netid' },
+                { title: '上次检修时间', field: 'time'},
+            ],
+            url : '/device_info/',
+            cache : false,
+            method : 'get',
+            queryParamsType: '',
+            queryParams: queryParams,
+            pagination: true,
+            pageNumber: 1,
+            pageSize: 10,
+            pageList: [10, 20, 50],
+            sidePagination: "server",
+            pageNumber: 1,
+            search: false, //显示搜索框
+            paginationPreText: "上一页",
+            paginationNextText: "下一页",  
+        })
+    });
+
+    function queryParams(params) {
+        return {
+            pageSize: params.pageSize,
+            pageIndex: params.pageNumber,
+            select_type : select_type,
+            id : $("#id").val(),
+            name : $("#name").val(),
+            type : $("#device_type").val(),
+            status : $("#device_status").val()
+        };
+    }
+
+    $("#comfirm").bind('click',function(){
+        var type = $("#add_device_type").val();
+        var name = $("#add_device_name").val();
+        var location = $("#add_device_location").val();
+        var stable = $("input[type=radio]:checked").val();
+
+        $.ajax({
+            url : "/add_device/",
+            type : 'get',
+            cache : false,
+            async : false,
+            data : {
+                'type' : type,
+                'name' : name,
+                'location' : location,
+                'stable' : stable
+            },
+            success : function(data){
+                $("#add").modal('hide');
+                $("#warn").text(data['message']);
+                $("#warnform").modal('show');
+                _table.bootstrapTable('refresh');
+            }
+        }) 
+    })
+
+    function add(){
+        $("#add_device_location").val("");
+        $("#add").modal('show');
+    }
+
+    function delete_(){
+        $("#delete").modal('show');
+    }
+
+    $("#comfirm_delete").bind('click',function(){
+        var items = $("input[type='checkbox']:checked");
+        var delete_items = [];
+        for (var i=0; i<items.length; i++){
+            if ($(items[i]).attr('name') == 'btSelectItem')
+                delete_items.push($(items[i]).parent().siblings(":first").text());
+        }
+
+        if (delete_items.length != 0){
+            $.ajax({
+                url : '/delete_device/',
+                cache : false,
+                type : 'get',
+                traditional:true,
+                data : {'items' : delete_items},
+                async : false,
+                success : function(data){
+                    $("#delete").modal('hide');
+                    $("#warn").text(data['message']);
+                    $("#warnform").modal('show');
+                    _table.bootstrapTable("refreshOptions",{pageNumber:1});
+                }
+            })
+        }
+        else{
+            $("#delete").modal('hide');
+            $("#warn").text("请选择要删除的设备记录");
+            $("#warnform").modal('show');
+        }
+    })
+</script>
+</body>
+</html>

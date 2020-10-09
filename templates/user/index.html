@@ -1,0 +1,624 @@
+﻿<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html class="no-js " lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>课室管理系统</title>
+<!-- Favicon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/static/assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.css"/>
+<link rel="stylesheet" href="/static/assets/plugins/morrisjs/morris.css" />
+<!-- Custom Css -->
+<link rel="stylesheet" href="/static/assets/css/main.css">
+<link rel="stylesheet" href="/static/assets/css/color_skins.css">
+<link href="/static/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+<link href="/static/assets/css/table6.css" rel="stylesheet" type="text/css">
+</head>
+<body class="theme-orange">
+    <div class="page-loader-wrapper">
+            <div class="loader">        
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <p>Please wait...</p>
+                <div class="m-t-30"><img src="/static/assets/images/logo.svg" width="48" height="48" alt="Nexa"></div>
+            </div>
+    </div>
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div><!-- Search  -->
+    <div class="search-bar">
+        <div class="search-icon"> <i class="material-icons">search</i> </div>
+        <input type="text" placeholder="Explore Nexa...">
+        <div class="close-search"> <i class="material-icons">close</i> </div>
+    </div>
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="col-12">
+            
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="index.html">课室管理系统</a>
+            </div>
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a></li>
+    
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <!-- 登出 -->
+                <li><a href="sign-in.html" class="mega-menu" data-close="true"><i class="zmdi zmdi-power"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Left Sidebar -->
+    <aside id="leftsidebar" class="sidebar">
+        <!-- User Info -->
+        <div class="user-info">
+            <div class="image">
+                <img src="/static/assets/images/xs/avatar1.jpg" width="48" height="48" alt="User" />
+            </div>
+            <div class="info-container">
+                <div class="name" data-toggle="dropdown">{{user_info.name}}</div>
+                <div class="email">{{user_info.email}}</div>
+            </div>
+        </div>
+    <!-- #User Info --> 
+    <!-- Menu -->
+    <div class="menu">
+        <ul class="list">
+            <li class="header">导航栏</li>
+            <li class="active open"> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-home"></i><span>用户功能</span></a>
+                <ul class="ml-menu">
+                    <li  class="active"><a href="/">个人中心</a> </li>
+                    <li><a href="/search_classroom_page/">课室查询</a></li>
+                    <li><a href='/apply_classroom_page/'>课室申请</a></li>
+                    <li><a href="/repair_message_submit/">设备故障报修</a></li>
+                    <li><a href="/multimedia_demand_submit/">设备申请</a></li>
+                    <li><a href="/device_record/">设备申请记录</a></li>
+                
+                </ul>
+            </li>         
+
+            
+        </ul>
+        </div>
+    <!-- #Menu --> 
+</aside>    
+
+
+<!-- Main Content -->
+<section class="content home">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>个人中心
+                
+                </h2>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> 课室管理系统</a></li>
+                    <li class="breadcrumb-item active">个人中心</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row clearfix">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="card activities" style="border-top:2px solid #136a8a;height: 380px">
+                            <div class="header">
+                                <h2>个人信息</h2>
+                                <ul class="header-dropdown m-r--5">
+                                    <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more-vert"></i> </a>
+                                        <ul class="dropdown-menu slideUp ">
+                                            <li><a href="javascript:void(0);" class=" waves-effect waves-block">修改信息</a></li>
+                                            </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="body">
+                                <ul class="inbox-widget list-unstyled clearfix">
+                                    <li class="inbox-inner" style="padding:5px 0px 10px 20px"> 
+                                        <div class="inbox-item">
+                                            <div class="inbox-img"> <i class="material-icons">person</i></div>
+                                            <div class="inbox-item-info">
+                                                <p class="author">姓名</p>
+                                                <p class="inbox-message" >{{user_info.name}}</p>
+                                            </div>
+                                        </div>
+                                        </a> </li>
+                                    <li class="inbox-inner" style="padding:10px 0px 10px 20px"> 
+                                            <div class="inbox-item">
+                                                    <div class="inbox-img"> <i class="material-icons">send</i></div>
+                                                    <div class="inbox-item-info">
+                                                        <p class="author">学院</p>
+                                                        <p class="inbox-message">{{user_info.academy}}</p>
+                                                    </div>
+                                                </div>
+                                                </a> </li>
+                                    <li class="inbox-inner" style="padding:10px 0px 10px 20px"> 
+                                                <div class="inbox-item">
+                                                        <div class="inbox-img"> <i class="material-icons">library_books</i></div>
+                                                        <div class="inbox-item-info">
+                                                            <p class="author">{{ user_info.is_stu }}</p>
+                                                            <p class="inbox-message" >{{user_info.account}}</p>
+                                                        </div>
+                                                    </div>
+                                                    </a> </li>
+                                    <li class="inbox-inner" style="padding:10px 0px 10px 20px"> 
+                                                <div class="inbox-item">
+                                                        <div class="inbox-img"> <i class="material-icons">call</i></div>
+                                                        <div class="inbox-item-info">
+                                                            <p class="author">联系电话</p>
+                                                            <p class="inbox-message">{{user_info.phone}}</p>
+                                                        </div>
+                                                    </div>
+                                                    </a> </li>  
+                                    <li class="inbox-inner" style="padding:10px 0px 0px 20px"> 
+                                                <div class="inbox-item">
+                                                        <div class="inbox-img"> <i class="material-icons">email</i></div>
+                                                        <div class="inbox-item-info">
+                                                            <p class="author">邮箱</p>
+                                                            <p class="inbox-message">{{user_info.email}}</p>
+                                                        </div>
+                                                    </div>
+                                                    </a> </li>                                                     
+                                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                
+    
+            <div class="col-lg-6 col-md-6 col-sm-12" style="height: 130px">
+                    <div class="card" style="border-top:2px solid #136a8a;height: 380px">
+                        <div class="header">
+                            <h2>公告栏 </h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more-vert"></i> </a>
+                                    <ul class="dropdown-menu slideUp ">
+                                        <li><a href="javascript:void(0);">查看更多</a></li>
+                                        
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <ul class="row list-unstyled c_review"> 
+                                    <li class="col-12" style="border-top:2px solid #eceeef">
+                                        <div class="comment-action">
+                                            <h5 class="c_name">
+                                                传达精神 部署工作 开启业务培训 ——中心顺利召开全员大会
+                                            </h5>
+                                            <p class="c_msg m-b-0">
+                                                为统一思想，提前谋划，我中心在第三教学楼213组织召开了中心全员大会。
+                                            </p>
+                                            <small class="comment-date float-sm-right">
+                                                2019-06-16
+                                            </small>
+                                        </div>
+                                    </li>
+                                    <li class="col-12" style="border-top:2px solid #eceeef">
+                                            <div class="comment-action">
+                                                <h5 class="c_name">
+                                                    教务部召开全体大会传达学习学校2019年春季工作会议精神
+                                                </h5>
+                                                <p class="c_msg m-b-0">
+                                                    4月24日上午，教务部召开全体大会，传达学习学校2019年春季工作会议精神。
+                                                </p>
+                                                <small class="comment-date float-sm-right">
+                                                    2019-06-15
+                                                </small>
+                                            </div>
+                                        </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="card" style="border-bottom:2px solid #136a8a">
+                        <div class="header">
+                            <h2>课室申请进度 <small></small> </h2>
+                            
+                        </div>
+                        
+                        <div class="body table-responsive members_profiles js-sweetalert">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>申请编号</th>
+                                        <th>使用日期</th>
+                                        <th>使用开始时间</th>
+                                        <th>使用结束时间</th>
+                                        <th>教室规模</th>
+                                        <th>教室类型</th>
+                                        <th>申请理由</th>                                    
+                                        <th>申请课室</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="centralTable">
+                                       
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        </div>       
+        
+    </div>
+</section>
+<!-- Jquery Core Js --> 
+<!-- Modal Dialogs ====================================================================================================================== --> 
+<!-- Default Size -->
+<div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="defaultModalLabel">申请详情</h4>
+            </div>
+            <div class="modal-body"><html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <title></title>
+                    <style>
+                        .lowTop{
+                            float: left;
+                            padding: 5px;
+                
+                            background-color: #fff;
+                            margin-top: 15px;
+                            width: 98%;
+                            margin-left: 1%;
+                            font-size: 12px;
+                        }
+                        .lowCon{
+                            width: 1090px;
+                            margin: 0 auto;
+                
+                
+                        }
+                        .borderLeft{
+                            border-left:2px solid #00a0e9;
+                
+                        }
+                
+                        .buleColor{
+                            color: skyblue;
+                        }
+                        .drakColor{
+                            color: #999999;
+                        }
+                        .redColor{
+                            color: red;
+                        }
+                        .greenColor{
+                            color: green;
+                        }
+                        .marginR{
+                            margin-right: 15px;
+                        }
+                        .topSpan{
+                            font-weight: bold;
+                            margin-right: 10px;
+                        }
+                        .crilcDiv{
+                            float: left;
+                        }
+                        .claer{
+                            clear: both;
+                        }
+                
+                        .cricleBox{
+                            width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                            line-height: 50px;
+                            text-align: center;
+                
+                        }
+                        .cricleText{
+                            text-align: center;
+                            font-size: 12px;
+                            width: 50px;
+                        }
+                        .noClice{
+                            background-color: #EEEEEE;
+                            border:2px solid #CCCCCC;
+                            color: #999999;
+                
+                        }
+                        .yesClice{
+                            background-color: rgba(64, 166, 105, 0.37);
+                            border:2px solid #40a669;
+                            color: #40a669;
+                
+                        }
+                        .lineDiv{
+                            float: left;
+                           line-height: 50px;
+                           height: 50px;
+                        }
+                        .lineDiv div{
+                            width: 150px;
+                            margin-top: 30px;
+                
+                        }
+                        .greeLine{
+                            border:1px solid green;
+                
+                        }
+                        .drakLine{
+                            border:1px solid #CCCCCC;
+                        }
+                        .tab{
+                            float: left;
+                            width: 100%;
+                            padding-top: 5px;
+                            padding-left: 5px;
+                            background-color: #CCCCCC;
+                            font-size: 12px;
+                        }
+                        .tab ul{
+                            margin: 0px;
+                            padding: 0px;
+                            list-style: none;
+                        }
+                        .tab ul li{
+                            float: left;
+                            width: 10%;
+                            line-height: 30px;
+                            text-align: center;
+                            border-top-left-radius: 5px;
+                            border-top-right-radius: 5px;
+                            cursor: pointer;
+                
+                        }
+                        .liActive{
+                            background-color: #ffffff;
+                            border-top:1px solid #ff9223;
+                
+                        }
+                        .contentDiv{
+                            float: left;
+                            font-size: 13px;
+                            width: 100%;
+                            display: none;
+                        }
+                        .contentDiv ul li{
+                            line-height: 30px;
+                        }
+                        .contentActive{
+                            display: block;
+                        }
+                    </style>
+                </head>
+                <body style="background-color: #EEEEEE">
+                
+                <div class="claer"></div>
+                <div class="lowTop">
+                    <div class="lowCon" id="flow">
+                    </div>
+                        
+                <div class="claer"></div>
+                <div class="lowTop">
+                    <div class="body"> 
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home">提交申请</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile">负责人审核</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#messages">教务部审核</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#result">办结</a></li>
+                            
+                        </ul>                        
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane in active" id="home"> <b></b>
+                                <div class="contentDiv contentActive">
+                                    <ul>
+                                        <li><strong>名称：</strong><span class="marginR">课室管理系统提交申请 </span></li>
+                                        <li><strong>步骤：</strong><span class="marginR">申请人提交了申请表 </span></li>
+                                         
+                                        <li id='result1'><strong>结果：</strong></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="profile"> <b></b>
+                                <div class="contentDiv contentActive">
+                                    <ul>
+                                        <li><strong>名称：</strong><span class="marginR">负责人审核 </span></li>
+                                        <li><strong>步骤：</strong><span class="marginR">负责人申请时间等相关事宜</span></li>
+                                         
+                                        <li id='result2'><strong>结果：</strong></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="messages"> <b></b>
+                                <div class="contentDiv contentActive">
+                                    <ul>
+                                        <li><strong>名称：</strong><span class="marginR">教务部审核 </span></li>
+                                        <li><strong>步骤：</strong><span class="marginR">教务部查看申请教室申办方及用途</span></li>
+                                         
+                                        <li id='result3'><strong>结果：</strong></li>
+                                    </ul>
+                                </div>
+                            </div>
+                          
+                            
+                            <div role="tabpanel" class="tab-pane" id="result"> <b></b>
+                                <div class="contentDiv contentActive">
+                                    <ul>
+                                         <li id='result4'><strong>申请结果：</strong></li>
+                                    </ul>
+                        
+                                </div>
+                               </div>
+                        </div>
+                    </div>
+                </div>
+                <script src="/static/assets/js/jquery/jquery-2.2.0.min.js"></script>
+                <script>
+                var val;
+                    $(function () {
+                        $(".tab ul li").click(function () {
+                           $(this).addClass("liActive").siblings().removeClass("liActive");
+                           var ins= $(this).index();
+                          $(".content>div").eq(ins).show().siblings('div').hide();
+                
+                
+                
+                        })
+                
+                   
+                        $.ajax({ 
+                            url:'/get_classroom_apply_info/',
+                            type:'get',
+                            
+                            success:function(data){
+                            var obj = data.rows;
+                            $(obj).each(function (index){
+                            val=obj[index];
+                            
+                        
+                            if(val.apply_category==0){
+                                category='普通课室'
+                            }
+                            else if(val.apply_category==0){
+                                category='多媒体课室'
+                            }
+                            else{
+                                category='多媒体录播课室'
+                            }
+                            
+                            
+                            st='<tr><td>'+
+                                    val.classroom_apply_id+
+                                '</td>'+
+                                '<td>'+
+                                    val.use_date+
+                                '</td>'+
+                                '<td>'+
+                                    val.section_begin+
+                                '</td>'+
+                                '<td>'+
+                                    val.section_end+
+                                '</td>'+
+                                '<td>'+
+                                    val.apply_size+
+                                '</td>'+
+                                '<td>'+
+                                    category+
+                                '</td>'+
+                                '<td>'+
+                                    val.apply_reason+
+                                '</td>'+
+                                '<td>'+
+                                    val.classroom+
+                                '</td>'+
+                                '<td>'+
+                                    '<button type="button" value="button" class="btn  bg-blue-grey waves-effect" data-toggle="modal" data-target="#defaultModal">查看详情</button>'
+                                '</td></tr>';
+                            })
+                            $("#centralTable").append(st);       
+  
+                        }
+                        })
+                    })
+                    
+                    
+                    $("#centralTable").on("click", ":button", function(event){
+                        
+                        if(val.apply_status==2){
+                            str1='<div class="crilcDiv"><div class="cricleBox yesClice">&radic;</div><div class="cricleText greenColor">提交申请</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
+                                +'<div class="crilcDiv"><div class="cricleBox yesClice">&radic;</div><div class="cricleText greenColor">单位负责人审核</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
+                                +'<div class="crilcDiv"><div class="cricleBox yesClice">&radic;</div><div class="cricleText greenColor">教务部审核</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
+                                +'<div class="crilcDiv"><div class="cricleBox yesClice">&radic;</div><div class="cricleText greenColor">办结</div></div>';
+                            result1='<span class="marginR greenColor">课室申请提交成功</span><span class="drakColor">'+'</span>';
+                            result2='<span class="marginR greenColor">单位负责人已确认</span><span class="drakColor">'+'</span>';
+                            result3='<span class="marginR greenColor">教务部同意申请</span><span class="drakColor">'+'</span>';
+                            result4='<span class="marginR greenColor">课室申请完成</span><span class="drakColor">'+'</span>'
+                        }
+                       
+                        
+                        else if(val.apply_status==1){
+                            str1='<div class="crilcDiv"><div class="cricleBox yesClice">&radic;</div><div class="cricleText greenColor">提交申请</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
+                                +'<div class="crilcDiv"><div class="cricleBox yesClice">&radic;</div><div class="cricleText greenColor">单位负责人审核</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
+                                +'<div class="crilcDiv"><div class="cricleBox noClice">&times;</div><div class="cricleText darkColor">教务部审核</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
+                                +'<div class="crilcDiv"><div class="cricleBox noClice">&times;</div><div class="cricleText darkColor">办结</div></div>';
+                            result1='<span class="marginR greenColor">课室申请提交成功</span><span class="drakColor">'+'</span>';
+                            result2='<span class="marginR greenColor">单位负责人已确认</span><span class="drakColor">'+'</span>';
+                            result3='<span class="marginR redColor">教务部处理中</span><span class="drakColor"></span>';
+                            result4='<span class="marginR redColor">课室申请中</span><span class="drakColor">/span>';
+
+                        }
+                        
+                        else if(val.apply_status==0){
+                            str1='<div class="crilcDiv"><div class="cricleBox yesClice">&radic;</div><div class="cricleText greenColor">提交申请</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
+                                +'<div class="crilcDiv"><div class="cricleBox noClice">&times;</div><div class="cricleText darkColor">单位负责人审核</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
+                                +'<div class="crilcDiv"><div class="cricleBox noClice">&times;</div><div class="cricleText darkColor">教务部审核</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
+                                +'<div class="crilcDiv"><div class="cricleBox noClice">&times;</div><div class="cricleText darkColor">办结</div></div>';
+                            result1='<span class="marginR greenColor">课室申请提交成功</span><span class="drakColor"></span>';
+                            result2='<span class="marginR redColor">单位负责人未确认</span><span class="drakColor"></span>';
+                            result3='<span class="marginR redColor">教务部未确认</span><span class="drakColor"></span>';
+                            result4='<span class="marginR redColor">课室申请中</span><span class="drakColor"></span>';
+                        }
+                        
+                        else{
+                            str1='<div class="crilcDiv"><div class="cricleBox noClice">&times;</div><div class="cricleText darkColor">提交申请</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
+                                +'<div class="crilcDiv"><div class="cricleBox noClice">&times;</div><div class="cricleText darkColor">单位负责人审核</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
+                                +'<div class="crilcDiv"><div class="cricleBox noClice">&times;</div><div class="cricleText darkColor">教务部审核</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
+                                +'<div class="crilcDiv"><div class="cricleBox noClice">&times;</div><div class="cricleText darkColor">办结</div></div>';
+                            result1='<span class="marginR redColor">课室申请提交失败</span><span class="drakColor"></span>';
+                            result2='<span class="marginR redColor">单位负责人未确认</span><span class="drakColor"></span>';
+                            result3='<span class="marginR redColor">教务部未确认</span><span class="drakColor"></span>';
+                            result4='<span class="marginR redColor">课室申请失败</span><span class="drakColor"></span>';
+                        }
+                    
+                        $("#flow").html(str1);
+                        $("#result1").html("<strong>结果：</strong>" + result1);
+                        $("#result2").html("<strong>结果：</strong>" + result2);
+                        $("#result3").html("<strong>结果：</strong>" + result3);
+                        $("#result4").html("<strong>结果：</strong>" + result4);
+                        
+                            
+        })
+
+    </script></body> </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/static/assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
+<script src="/static/assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
+
+<script src="/static/assets/bundles/jvectormap.bundle.js"></script> <!-- JVectorMap Plugin Js -->
+<script src="/static/assets/bundles/morrisscripts.bundle.js"></script><!-- Morris Plugin Js -->
+<script src="/static/assets/bundles/sparkline.bundle.js"></script> <!-- Sparkline Plugin Js -->
+<script src="/static/assets/bundles/knob.bundle.js"></script> <!-- Jquery Knob Plugin Js -->
+<script src="/static/assets/bundles/mainscripts.bundle.js"></script>
+<script src="/static/assets/js/pages/index.js"></script>
+<script src="/static/assets/js/pages/ui/dialogs.js"></script> 
+
+<script src="/static/assets/plugins/sweetalert/sweetalert.min.js"></script> <!-- SweetAlert Plugin Js --> 
+<script>
+function application(){
+    window.location.href = '/apply_classroom_page/';
+}
+</script>
+
+</body>
+</html>
+

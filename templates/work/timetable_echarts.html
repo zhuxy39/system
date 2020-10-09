@@ -1,0 +1,181 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
+    <title></title>
+    <link href="/static/work/js/bstable/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/work/js/bstable/css/bootstrap-table.css" rel="stylesheet" type="text/css">
+    <link href="/static/work/css/table.css" rel="stylesheet" type="text/css">
+</head>
+<body style="background-color: #ecf0f5;font-family: 微软雅黑;color: #475059;min-width: 1000px;overflow: auto">
+<div class="notice_main">
+<h2></h2>
+<div id="time_table" style="height:100%; width:100%;align : center;">
+</div>
+</div>
+
+<script src="/static/work/js/jquery/jQuery-2.2.0.min.js"></script>
+<script src="/static/work/js/bstable/js/bootstrap.min.js"></script>
+<script src="/static/work/js/bstable/js/bootstrap-table.js"></script>
+<script src="/static/work/js/bstable/js/bootstrap-table-zh-CN.min.js"></script>
+<script src="/static/work/js/layer_v2.1/layer/layer.js"></script>
+<script  src="/static/work/js/echarts/echarts-all.js"></script>
+<script src="/static/work/js/echarts/echarts.min.js"></script>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('time_table'));
+    {% autoescape off %}
+    var _data = {{ data }};
+    {% endautoescape %}
+    
+    {% comment %} [[1,2,1,1,"123456"], [7,8,7,1,"123456"],[9,10,6,0,"123456"],[1,2,3,1,"123456"],[5,6,1,0,"123456"],[9,10,1,2,"123456"],[9,10,6,2,"123456"],[1,2,8,1,"123456"],[7,8,4,2,"123456"],[9,10,9,0,"123456"],[7,8,3,0,"123456"],[3,4,7,2,"123456"],[7,8,0,2,"123456"],[3,4,5,2,"123456"]]; {% endcomment %}
+    var colorList = ['#5ca9ff', '#b7e576', '#f06868'];
+    var str = "日一二三四五六";
+    
+    _data = echarts.util.map(_data, function (item, index) {
+        return {
+            name : "123",
+            value: item,
+            itemStyle: {
+                normal: {
+                    color: colorList[item[3]],
+                }
+            }
+        };
+    });
+ 
+    _data.forEach(function(item){
+        if(item.value[3]==1)
+            item.name = "待复审申请";
+        else if(item.value[3]==2)
+            item.name = "已通过申请";
+        else if(item.value[3]===0)
+            item.name = "课程占用";
+    });
+
+    function renderItem(params, api) {
+        var yValue = api.value(0);
+        var start = api.coord([api.value(2), yValue]);
+        var size = api.size([1, api.value(1) -yValue+1]);
+        var style = api.style();
+        return {
+            type: 'rect',
+            shape: {
+                x: start[0],
+                y: start[1],
+                width: size[0],
+                height: size[1]
+            },
+            style: style
+        };
+    }
+
+    var option = {
+        title: {
+            text: '课室占用情况',
+            left: 'center'   
+        },
+        tooltip: {
+            trigger: 'item', 
+            formatter: function(datas) 
+            {
+                var res = '详情：' + '<br/>';
+                res += datas.value(3);
+                return res;
+            },
+        },
+        xAxis: {
+        
+            type : 'value',
+            min : 0,
+            max : 13,
+            splitNumber : 16,
+            position : 'top',
+            axisLabel :{
+                padding : [0,0,0,15],
+                align : 'left',
+                rotate : 0,
+                formatter : function (value){
+                    if(value==13)
+                        return ;
+                    var myDate = new Date();
+                    myDate.setDate(myDate.getDate() + value);
+                    var week = myDate.getDay();
+                    var month = myDate.getMonth()+1;
+                    var day = myDate.getDate();
+                    return  month + '月' + day + '日' + ' \n星期' +"日一二三四五六".charAt(week);
+            
+                },
+            },
+        
+        },
+        yAxis:[{
+        
+            position : 'left',
+            min : 1,
+            max : 11,
+            splitNumber : 10,
+            inverse : true,
+            offset : 10,
+            axisLabel :{
+                verticalAlign : 'right',
+                padding:[20,0],
+                formatter : function (value){
+                    
+                   if(value==11)
+                        return ;
+                    return "第" + (value)+ "节";
+            
+                },
+            },
+        },
+        {
+            position : 'right',
+            min : 1,
+            max : 11,
+            splitNumber : 10,
+            inverse : true,
+    
+            axisLabel :{
+            
+                formatter : function (value){
+                    if(value==1)
+                        return ("08:00");
+                    else if(value==3)
+                        return ("10:00");
+                    else if(value==5)
+                        return ("14:20");
+                    else if(value==7)
+                        return ("16:20");
+                    else if(value==9)
+                        return ("19:00");
+                    else if(value==11)
+                        return ("20:40");
+            
+                    },
+                },
+        }],
+        series: [{
+            type: 'custom',
+            renderItem: renderItem,
+            label: {
+                normal: {
+                    show: false,
+                    position: 'top'
+                }
+            },
+            dimensions: ['开始','结束','距离天数','占用类型','详情'],
+            encode: {
+                x: 2,
+                y: [0,1],
+            },
+            data: _data
+        }]
+    };
+        
+    myChart.setOption(option);
+    
+
+</script>
+
+</body>
+</html>

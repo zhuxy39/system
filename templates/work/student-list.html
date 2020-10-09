@@ -1,0 +1,351 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
+    <title></title>
+    <link href="/static/work/js/bstable/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/work/js/bstable/css/bootstrap-table.css" rel="stylesheet" type="text/css">
+    
+    <link href="/static/work/css/table.css" rel="stylesheet" type="text/css">
+</head>
+<body style="background-color: #ecf0f5;font-family: 微软雅黑;color: #475059;min-width: 1000px;overflow: auto">
+<div class="notice_main">
+    <!--
+    <h6>表格一</h6>
+    <div style="border-bottom: 1px #ccc solid;padding-bottom: 8px">
+        <p style="line-height: 24px;font-size: 14px;padding: 4px 0 0 36px ;color:#bb8940;background-image: url(img/ts_03.png);background-repeat: no-repeat;background-position: 10px 8px;font-weight: bold">温馨提示</p>
+        <ul class="ts">
+            <li><span>*</span>该页面主要显示的是表格一的类容。</li>
+            <li><span>*</span>该页面主要显示的是表格一的类容。</li>
+        </ul>
+    </div>
+    -->
+    <div class="notice_check">
+        <div class="btn-group l_left" style="margin-right: 4px">
+            <button type="button" class="btn btn-default change" style="height: 30px;line-height: 30px;padding: 0 12px !important;font-size: 12px">选择条件</button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height: 30px;line-height: 30px">
+                <span class="caret"></span>
+                <span class="sr-only"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li value='all'>全部学生信息</li>
+                <li value='netid'>按netid查询</li>
+                <li value='department'>按学院查询</li>
+                <li value='major'>按专业查询</li>
+            </ul>
+        </div>
+        <div class="l_left">
+            <input type="text" class="find_input">
+        </div>
+        <button class="check_btn">查询</button>
+
+        <div class="notice_nav r_right">
+            <a class="btn btn-default" onclick="add()"><span class="glyphicon glyphicon-plus"></span>新增</a>
+        </div>
+</div>
+    <table id="table" class = "table_style" style="margin: 0 auto" >
+    </table>
+</div>
+
+    <div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">修改信息</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="name">姓名</label>
+                    <input type="text" class="form-control" id="name">
+                    <p></p>
+                    <label for="email">邮箱</label>
+                    <input type="email" class="form-control" id="email">
+                    <p></p>
+                    <p><span class="pull-left text-danger"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="comfirm">确认修改</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="warnform" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">提醒框</h4>
+                </div>
+                <div class="modal-body" id="warn"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="comfirm_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">提示</h4>
+                </div>
+                <div class="modal-body">是否确定删除该用户</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="ok">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="add_stu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">添加学生用户</h4>
+                </div>
+                <div class="modal-body"> 
+                        <label class="">netid:</label>
+                        <input type="text" class="find_input" id="add_netid">
+                        <p style="margin-bottom: 5px;padding-bottom: 5px; border-bottom: 1px "></p>
+                        <p style="margin-bottom: 3px"></p>
+                        <label class="">姓名:</label>
+                        <input type="text" class="find_input" id="add_name">
+                        <p style="margin-bottom: 5px;padding-bottom: 5px; border-bottom: 1px "></p>
+                        <p style="margin-bottom: 3px"></p>
+                        <label class="">学院:</label>
+                        <select class="find_input" id = "add_academy">
+                            {% for d in departments %}
+                                <option value="{{ d.id }}">{{ d.academy_name }}</option>
+                            {% endfor %}
+                        </select>
+                        <p style="margin-bottom: 3px"></p>
+                        <label class="">专业:</label>
+                        <select class="find_input" id = "add_major">
+                            {% for m in majors %}
+                                <option value="{{ m.id }}">{{ m.major_name }}</option>
+                            {%endfor %}
+                        </select>
+                        <p style="margin-bottom: 3px"></p>
+                        <label class="">邮箱:</label>
+                        <input type="text" class="find_input" id = "add_email">
+                        <p style="margin-bottom: 3px"></p>
+                        <label class="">手机:</label>
+                        <input type="text" class="find_input" id = "add_phone">
+                        <p style="margin-bottom: 3px"></p>
+                        <label class="">密码:</label>
+                        <input type="password" class="find_input" id = "add_password">
+                        <p style="margin-bottom: 5px;padding-bottom: 5px; border-bottom: 1px "></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="add_comfirm">确定添加</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="/static/work/js/jquery/jQuery-2.2.0.min.js"></script>
+<script src="/static/work/js/bstable/js/bootstrap.min.js"></script>
+<script src="/static/work/js/bstable/js/bootstrap-table.js"></script>
+<script src="/static/work/js/bstable/js/bootstrap-table-zh-CN.min.js"></script>
+<script src="/static/work/js/layer_v2.1/layer/layer.js"></script>
+<script type="text/javascript">
+
+    function add(){
+        $("#add_netid").val("");
+        $("#add_name").val("");
+        $("#add_password").val("");
+        $("#add_email").val("");
+        $("#add_phone").val("");
+        $("#add_stu").modal("show");
+    }
+
+    $("#add_comfirm").bind("click",function(){
+        var netid = $("#add_netid").val();
+        var name = $("#add_name").val();
+        var academy = $("#add_academy").val();
+        var major = $("#add_major").val();
+        var email = $("#add_email").val();
+        var phone = $("#add_phone").val();
+        var password = $("#add_password").val();
+
+        $.ajax({
+            url : '/add_student/',
+            type : 'get',
+            cache : false,
+            data : {
+                'netid' : netid,
+                'name' : name,
+                'academy' : academy,
+                'major' : major,
+                'email' : email,
+                'phone' : phone,
+                'password' : password,
+            },
+            success : function(data){
+                if (data['status'] == 'success'){
+                    _table.bootstrapTable("refreshOptions",{pageNumber:1});
+                    $("#add_stu").modal('hide');
+                    $("#warn").text(data['message']);
+                    $("#warnform").modal('show'); 
+                }
+                else{
+                    $("#add_stu").modal('hide');
+                    $("#warn").text(data['message']);
+                    $("#warnform").modal('show');    
+                }
+            }
+        })
+    })
+
+    var _table, select_type = 'all'; 
+    $(function () {
+        change();
+        _table = $("#table").bootstrapTable({
+            columns: [
+                { checkbox: true },
+                { title: 'netid', field : 'netid'},
+                { title: '姓名', field: 'name' },
+                { title: '所属院系', field: 'department' },
+                { title: '所属专业', field: 'major' },
+                { title: '邮箱', field: 'email' },
+                { title: '状态', field: 'status'},
+                {
+                    title: '操作', field: 'operate', formatter: function (value, row, index) {
+                        var html = '<a href="#" onclick="edit(this)">编辑</a>';
+                        html += '　<a href="#" onclick="delete_user(this)">删除</a>';
+                        html += '　<a href="#" onclick="suspend(this)">停用</a>';
+                        html += '　<a href="#" onclick="recover(this)">恢复</a>';
+                        return html;
+                    }
+                }
+            ],
+            url : '/student_info/',
+            cache : false,
+            method : 'get',
+            queryParamsType: '',
+            queryParams: queryParams,
+            pagination: true,
+            pageNumber: 1,
+            pageSize: 10,
+            pageList: [10, 20, 50],
+            sidePagination: "server",
+            pageNumber: 1,
+            search: false, //显示搜索框
+            uniqueId: "netid",
+            paginationPreText: "上一页",
+            paginationNextText: "下一页",  
+        })
+    });
+    function change(){
+       $(".dropdown-menu>li").click(function(){
+           $(".change").html($(this).html());
+           select_type = $(this).attr('value');
+       })
+    }
+
+    function queryParams(params) {
+        return {
+            pageSize: params.pageSize,
+            pageIndex: params.pageNumber,
+            select_type : select_type,
+            condition : $(".find_input").val(),
+        };
+    }
+
+    $(".check_btn").bind('click',function(){
+        _table.bootstrapTable("refreshOptions",{pageNumber:1});
+        return false;
+    })
+
+    function suspend(e){
+        var netid = $(e).parent().siblings(":eq(1)").text();
+        var status = $(e).parent().siblings(":eq(6)");
+        $.ajax({
+            url : '/suspend/' + netid + '/',
+            cache : false,
+            type : 'get',
+            success : function(data){
+                status.text('已停用');
+                $("#warn").text(data['message']);
+                $("#warnform").modal('show');
+            }
+        });
+    }
+
+    var delete_netid;
+    function delete_user(e){
+        $("#comfirm_delete").modal("show");
+        delete_netid = $(e).parent().siblings(":eq(1)").text();
+    }
+
+    $("#ok").bind("click",function(){
+        $.ajax({
+            url : '/delete/' + delete_netid + '/',
+            cache : false,
+            async : false,
+            type : 'get',
+            success : function(data){
+                _table.bootstrapTable("refreshOptions",{pageNumber:1});
+                $("#comfirm_delete").modal('hide');
+                $("#warn").text(data['message']);
+                $("#warnform").modal('show');   
+            }
+        })
+    })
+
+    function recover(e){
+        var netid = $(e).parent().siblings(":eq(1)").text();
+        var status = $(e).parent().siblings(":eq(6)");
+        $.ajax({
+            url : '/recover/' + netid + '/',
+            cache : false,
+            type : 'get',
+            success : function(data){
+                status.text('已启用');
+                $("#warn").text(data['message']);
+                $("#warnform").modal('show');
+            }
+        });
+    }
+
+    var modify_netid, modify_name, modify_email;
+    function edit(e){
+        modify_netid = $(e).parent().siblings(":eq(1)").text();
+        modify_name = $(e).parent().siblings(":eq(2)");
+        modify_email = $(e).parent().siblings(":eq(5)");
+        $("#name").val(modify_name.text());
+        $("#email").val(modify_email.text());
+        $("#modify").modal('show'); 
+    }
+
+    $("#comfirm").bind('click',function(){
+        $.ajax({
+            url : '/modify/' + modify_netid + '/',
+            cache : false,
+            type : 'get',
+            data : {
+                'name' : $("#name").val(),
+                'email' : $("#email").val(),
+            },
+            success : function(data) {
+                modify_name.text(data['name']);
+                modify_email.text(data['email']);
+                $("#modify").modal('hide');
+                $("#warn").text("修改信息成功");
+                $("#warnform").modal("show"); 
+            }
+        });
+        return false;
+    });
+</script>
+
+</body>
+</html>

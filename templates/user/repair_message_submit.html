@@ -1,0 +1,184 @@
+﻿<!doctype html>
+<html class="no-js " lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>课室管理系统</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<!-- Favicon-->
+<link rel="stylesheet" href="/static/assets/plugins/bootstrap/css/bootstrap.min.css">
+<!-- Bootstrap Material Datetime Picker Css -->
+<link href="/static/assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+<!-- Wait Me Css -->
+<link href="/static/assets/plugins/waitme/waitMe.css" rel="stylesheet" />
+<!-- Bootstrap Select Css -->
+<link href="/static/assets/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+<!-- Custom Css -->
+<link  rel="stylesheet" href="/static/assets/css/main.css">
+<link rel="stylesheet" href="/static/assets/css/color_skins.css">
+
+</head>
+<!-- Page Loader -->
+<body class="theme-orange">
+<div class="page-loader-wrapper">
+        <div class="loader">        
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <p>Please wait...</p>
+            <div class="m-t-30"><img src="/static/assets/images/logo.svg" width="48" height="48" alt="Nexa"></div>
+        </div>
+</div>
+<!-- Overlay For Sidebars -->
+<div class="overlay"></div><!-- Search  -->
+<div class="search-bar">
+    <div class="search-icon"> <i class="material-icons">search</i> </div>
+    <input type="text" placeholder="Explore Nexa...">
+    <div class="close-search"> <i class="material-icons">close</i> </div>
+</div>
+<!-- Top Bar -->
+<nav class="navbar">
+    <div class="col-12">
+        
+        <div class="navbar-header">
+            <a href="javascript:void(0);" class="bars"></a>
+            <a class="navbar-brand" href="/homepage/">课室管理系统</a>
+        </div>
+        <ul class="nav navbar-nav navbar-left">
+            <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a></li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <!-- 登出 -->
+            <li><a href="/logout/" class="mega-menu" data-close="true"><i class="zmdi zmdi-power"></i></a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Left Sidebar -->
+<aside id="leftsidebar" class="sidebar">
+    <!-- User Info -->
+    <div class="user-info">
+        <div class="image">
+            <img src="/static/assets/images/xs/avatar1.jpg" width="48" height="48" alt="User" />
+        </div>
+        <div class="info-container">
+            <div class="name" data-toggle="dropdown">{{ member.name }}</div>
+            <div class="email">{{ member.user.email }}</div>
+        </div>
+    </div>
+    <!-- #User Info --> 
+    <!-- Menu -->
+    <div class="menu">
+            <ul class="list">
+                <li class="header">导航栏</li>
+                <li class="active open"> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-home"></i><span>用户功能</span></a>
+                    <ul class="ml-menu">
+                        <li ><a href="/">个人中心</a> </li>
+                    <li class="active"><a href="/search_classroom_page/">课室查询</a></li>
+                    <li><a href="/application/">课室申请</a></li>
+                    <li><a href="/repair_message_submit/">设备故障报修</a></li>
+                    <li><a href="/multimedia_demand_submit/">设备申请</a></li>
+                    <li><a href="/device_record/">设备申请记录</a></li>
+                    </ul>
+                </li>         
+    
+                
+            </ul>
+        </div>
+    <!-- #Menu --> 
+</aside>   
+<!-- Main Content -->
+<section class="content home">
+    
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="/"><i class="zmdi zmdi-home"></i>课室管理系统</a></li>
+                    <li class="breadcrumb-item active">设备故障提交</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>设备报修表格
+                <small class="text-muted">请在下面的表格填写课室故障信息</small>
+                </h2>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <!-- Select -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <!-- <h2> 设备报修表格</h2> -->
+                    </div>
+                    <div class="body">
+                        <h2 class="card-inside-title">请输入设备id</h2>
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input id="device-id" rows="4" class="form-control no-resize" placeholder="请输入设备id" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h2 class="card-inside-title">请输入故障描述</h2>
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input id="detail" rows="4" class="form-control no-resize" placeholder="请客观描述课室设备的故障情况" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <button class="btn btn-raised btn-primary m-t-15 waves-effect" id="submit">提交故障信息</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="/static/js/jquery-3.3.1.min.js"></script> 
+<script>
+    $("#submit").bind("click",function(){
+        $.ajax({
+            url:"/submit/",
+            type : "get",
+            data:{
+                device_id : document.getElementById("device-id").value,
+                detail : document.getElementById("detail").value,
+            },
+            success:function(data){
+                alert("您已成功提交");
+                document.getElementById("device-id").value = "";
+                document.getElementById("detail").value = "";
+            },
+        })
+    })
+	
+
+</script>
+<!-- Jquery Core Js -->
+<script src="/static/assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
+<script src="/static/assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
+
+<script src="/static/assets/plugins/autosize/autosize.js"></script> <!-- Autosize Plugin Js --> 
+<script src="/static/assets/plugins/momentjs/moment.js"></script> <!-- Moment Plugin Js --> 
+<!-- Bootstrap Material Datetime Picker Plugin Js --> 
+<script src="/static/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script> 
+
+<script src="/static/assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js --> 
+<script src="/static/assets/js/pages/forms/basic-form-elements.js"></script> 
+</body>
+</html>

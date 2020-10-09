@@ -1,0 +1,135 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
+    <title></title>
+    <link href="/static/work/js/bstable/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/work/js/bstable/css/bootstrap-table.css" rel="stylesheet" type="text/css">
+    <link href="/static/work/css/table.css" rel="stylesheet" type="text/css">
+    <style>
+        .th th{background-color: #e9dfd7 !important;}
+    </style>
+</head>
+<body style="background-color: #ecf0f5;font-family: 微软雅黑;color: #475059;min-width: 1000px;overflow: auto">
+<div class="notice_main">
+    <h6>故障提交记录</h6>
+    <div class="notice_check">
+        <div class="btn-group l_left" style="margin-right: 4px">
+            <button type="button" class="btn btn-default change" style="height: 30px;line-height: 30px;padding: 0 12px !important;font-size: 12px">选择条件</button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height: 30px;line-height: 30px">
+                <span class="caret"></span>
+                <span class="sr-only"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li value="all">全部申请单</li>
+                <li value="netid">提交者编号</li>
+            </ul>
+        </div>
+        <div class="l_left">
+            <input type="text" class="find_input">
+
+        </div>
+        <button class="check_btn" onclick="clicks()">查询</button>
+    </div>
+    <table id="table" class="table_style" style="margin: 0 auto" > </table>
+
+    <div class="modal fade" id="warnform" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">提醒框</h4>
+                </div>
+                <div class="modal-body" id="warn"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="/static/work/js/jquery/jQuery-2.2.0.min.js"></script>
+    <script src="/static/work/js/bstable/js/bootstrap.min.js"></script>
+    <script src="/static/work/js/bstable/js/bootstrap-table.js"></script>
+    <script src="/static/work/js/bstable/js/bootstrap-table-zh-CN.min.js"></script>
+    <script src="/static/work/js/layer_v2.1/layer/layer.js"></script>
+    <script>
+    var _table, select_type = 'all';
+    $(function () {
+        change();
+        _table = $("#table").bootstrapTable({
+            columns: [
+                { checkbox: true },
+                { title: '提交者编号', field: 'netid'},
+                { title: '提交者姓名', field: 'name' },
+                { title: '故障设备编号', field: 'device_id'},
+                { title: '故障设备类型', field: 'device_type'},
+                { title: '故障设备名称', field: 'device_name'},
+                { title: '备注', field: 'detail'},
+                { title: '提交日期', field: 'date'},
+                {
+                    title: '操作', field: 'operate', formatter: function (value, row, index) {
+                        var html = '<a href="#" onclick="edit(this)" value="'+ value + '">处理</a>';
+                        return html;
+                    }
+                }
+            ],
+            url : '/device_broken_info/',
+            cache : false,
+            method : 'get',
+            queryParamsType: '',
+            queryParams: queryParams,
+            pagination: true,
+            pageNumber: 1,
+            pageSize: 1,
+            pageList: [10, 20, 50],
+            sidePagination: "server",
+            pageNumber: 1,
+            search: false, //显示搜索框
+            paginationPreText: "上一页",
+            paginationNextText: "下一页",  
+        })
+    });
+
+    function change(){
+       $(".dropdown-menu>li").click(function(){
+           $(".change").html($(this).html());
+           select_type = $(this).attr('value');
+       })
+    }
+
+    function queryParams(params) {
+        return {
+            pageSize: params.pageSize,
+            pageIndex: params.pageNumber,
+            select_type : select_type,
+            condition : $(".find_input").val(),
+        };
+    }
+
+    $(".check_btn").bind('click',function(){
+        _table.bootstrapTable("refreshOptions",{pageNumber:1});
+        $(".find_input").val("");
+        return false;
+    })
+
+    function edit(e){
+        var id = $(e).attr('value');
+        $.ajax({
+            url : '/deal_broken/',
+            type : 'get',
+            cache : false,
+            data : {
+                'id' : id,
+            },
+            success : function(data){
+                $("#warn").text(data['message']);
+                $("#warnform").modal('show');
+                _table.bootstrapTable("refreshOptions",{pageNumber:1});
+            }
+        })
+    }
+    </script>
+</body>
+</html>
