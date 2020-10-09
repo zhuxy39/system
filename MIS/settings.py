@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'MIS.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'G:/system/system/sqlite3.db',
+        'NAME': 'sqlite3.db',
     }
 }
 
