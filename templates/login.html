@@ -277,7 +277,7 @@ alert("{{ message }}");
 		{% comment %} 显示注册弹窗 {% endcomment %}
 		$("#signup").bind("click", function(){
 			$("#hide_major").show();
-			$("#change_username").children("label").text("请输入学号");
+			{#$("#change_username").children("label").text("请输入学号");#}
 			$('#mask').show();
 			$('#signup_popup').show();
 		});
@@ -310,7 +310,7 @@ alert("{{ message }}");
 						$("#signup_warn").text(data['message']);
 					}
 					else
-						alert("请前往邮箱确认注册并登陆~");
+						alert("注册成功请登陆~");
 						$('#mask').hide();
 						$('#signup_popup').hide();
 					}

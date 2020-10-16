@@ -124,7 +124,7 @@ def signup(request):
 		return JsonResponse({
 			'status' : 'success',
 			'code' : '200',
-			'message' : '请查收邮件激活账号',
+			'message' : '注册并激活成功',
 			'username' : username,
 			'password' : password,
 			'email' : email,
