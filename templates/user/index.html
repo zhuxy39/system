@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html class="no-js " lang="en">
@@ -414,7 +414,6 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs">
                             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home">提交申请</a></li>
-                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile">负责人审核</a></li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#messages">教务部审核</a></li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#result">办结</a></li>
                             
@@ -428,16 +427,6 @@
                                         <li><strong>步骤：</strong><span class="marginR">申请人提交了申请表 </span></li>
                                          
                                         <li id='result1'><strong>结果：</strong></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="profile"> <b></b>
-                                <div class="contentDiv contentActive">
-                                    <ul>
-                                        <li><strong>名称：</strong><span class="marginR">负责人审核 </span></li>
-                                        <li><strong>步骤：</strong><span class="marginR">负责人申请时间等相关事宜</span></li>
-                                         
-                                        <li id='result2'><strong>结果：</strong></li>
                                     </ul>
                                 </div>
                             </div>
@@ -466,7 +455,8 @@
                 </div>
                 <script src="/static/assets/js/jquery/jquery-2.2.0.min.js"></script>
                 <script>
-                var val;
+                    var val;
+                    var obj;
                     $(function () {
                         $(".tab ul li").click(function () {
                            $(this).addClass("liActive").siblings().removeClass("liActive");
@@ -483,7 +473,7 @@
                             type:'get',
                             
                             success:function(data){
-                            var obj = data.rows;
+                            obj = data.rows;
                             $(obj).each(function (index){
                             val=obj[index];
                             
@@ -524,7 +514,7 @@
                                     val.classroom+
                                 '</td>'+
                                 '<td>'+
-                                    '<button type="button" value="button" class="btn  bg-blue-grey waves-effect" data-toggle="modal" data-target="#defaultModal">查看详情</button>'
+                                    '<button type="button" value="button" class="btn  bg-blue-grey waves-effect" data-toggle="modal" data-target="#defaultModal" id="'+index+'">查看详情</button>'
                                 '</td></tr>';
                              $("#centralTable").append(st);
                             })
@@ -535,56 +525,48 @@
                     
                     
                     $("#centralTable").on("click", ":button", function(event){
-                        
-                        if(val.apply_status==2){
+                        var t = $(this).attr("id");
+
+                        if(obj[t].apply_status==2){
                             str1='<div class="crilcDiv"><div class="cricleBox yesClice">&radic;</div><div class="cricleText greenColor">提交申请</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
-                                +'<div class="crilcDiv"><div class="cricleBox yesClice">&radic;</div><div class="cricleText greenColor">单位负责人审核</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
                                 +'<div class="crilcDiv"><div class="cricleBox yesClice">&radic;</div><div class="cricleText greenColor">教务部审核</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
                                 +'<div class="crilcDiv"><div class="cricleBox yesClice">&radic;</div><div class="cricleText greenColor">办结</div></div>';
                             result1='<span class="marginR greenColor">课室申请提交成功</span><span class="drakColor">'+'</span>';
-                            result2='<span class="marginR greenColor">单位负责人已确认</span><span class="drakColor">'+'</span>';
                             result3='<span class="marginR greenColor">教务部同意申请</span><span class="drakColor">'+'</span>';
                             result4='<span class="marginR greenColor">课室申请完成</span><span class="drakColor">'+'</span>'
                         }
                        
                         
-                        else if(val.apply_status==1){
+                        else if (obj[t].apply_status==1){
                             str1='<div class="crilcDiv"><div class="cricleBox yesClice">&radic;</div><div class="cricleText greenColor">提交申请</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
-                                +'<div class="crilcDiv"><div class="cricleBox yesClice">&radic;</div><div class="cricleText greenColor">单位负责人审核</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
                                 +'<div class="crilcDiv"><div class="cricleBox noClice">&times;</div><div class="cricleText darkColor">教务部审核</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
                                 +'<div class="crilcDiv"><div class="cricleBox noClice">&times;</div><div class="cricleText darkColor">办结</div></div>';
                             result1='<span class="marginR greenColor">课室申请提交成功</span><span class="drakColor">'+'</span>';
-                            result2='<span class="marginR greenColor">单位负责人已确认</span><span class="drakColor">'+'</span>';
                             result3='<span class="marginR redColor">教务部处理中</span><span class="drakColor"></span>';
                             result4='<span class="marginR redColor">课室申请中</span><span class="drakColor">/span>';
 
                         }
                         
-                        else if(val.apply_status==0){
+                        else if (obj[t].apply_status==0){
                             str1='<div class="crilcDiv"><div class="cricleBox yesClice">&radic;</div><div class="cricleText greenColor">提交申请</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
-                                +'<div class="crilcDiv"><div class="cricleBox noClice">&times;</div><div class="cricleText darkColor">单位负责人审核</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
                                 +'<div class="crilcDiv"><div class="cricleBox noClice">&times;</div><div class="cricleText darkColor">教务部审核</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
                                 +'<div class="crilcDiv"><div class="cricleBox noClice">&times;</div><div class="cricleText darkColor">办结</div></div>';
                             result1='<span class="marginR greenColor">课室申请提交成功</span><span class="drakColor"></span>';
-                            result2='<span class="marginR redColor">单位负责人未确认</span><span class="drakColor"></span>';
                             result3='<span class="marginR redColor">教务部未确认</span><span class="drakColor"></span>';
                             result4='<span class="marginR redColor">课室申请中</span><span class="drakColor"></span>';
                         }
                         
                         else{
                             str1='<div class="crilcDiv"><div class="cricleBox noClice">&times;</div><div class="cricleText darkColor">提交申请</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
-                                +'<div class="crilcDiv"><div class="cricleBox noClice">&times;</div><div class="cricleText darkColor">单位负责人审核</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
                                 +'<div class="crilcDiv"><div class="cricleBox noClice">&times;</div><div class="cricleText darkColor">教务部审核</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
                                 +'<div class="crilcDiv"><div class="cricleBox noClice">&times;</div><div class="cricleText darkColor">办结</div></div>';
                             result1='<span class="marginR redColor">课室申请提交失败</span><span class="drakColor"></span>';
-                            result2='<span class="marginR redColor">单位负责人未确认</span><span class="drakColor"></span>';
                             result3='<span class="marginR redColor">教务部未确认</span><span class="drakColor"></span>';
                             result4='<span class="marginR redColor">课室申请失败</span><span class="drakColor"></span>';
                         }
                     
                         $("#flow").html(str1);
                         $("#result1").html("<strong>结果：</strong>" + result1);
-                        $("#result2").html("<strong>结果：</strong>" + result2);
                         $("#result3").html("<strong>结果：</strong>" + result3);
                         $("#result4").html("<strong>结果：</strong>" + result4);
                         
