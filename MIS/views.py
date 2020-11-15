@@ -780,17 +780,39 @@ def device_apply_record_info(request):
 def Device_broken(request):	
 	return render(request,'work/device_broken.html')
 
-def device_broken_info(request):
+def device_broken_info(request,record_index=-1):
 	pageSize = int(request.GET.get('pageSize'))
 	pageIndex = int(request.GET.get('pageIndex'))
 	select_type = request.GET.get('select_type')
 	condition = request.GET.get('condition')
+	if(request.GET.get('record_id')!=None):
+		record_index=int(request.GET.get('record_id'))
+
+	# 返回已完成维修信息
+	if record_index!=-1:
+		applys=[]
+		infos=device_broken.objects.filter(pk=record_index);
+		infos_count = infos.count()
+		for info in infos:
+			context={'check' : ''}
+			context['device_id'] = info.device.pk
+			context['pass_time'] = info.pass_time;
+			context['pass_user'] = str(info.pass_user);
+			applys.append(context)
+		return JsonResponse({
+			'total' : infos_count,
+			'rows' : applys,
+			'status' : 'success',
+			'code' : '200',
+			'message' : '请求成功'
+		})
+
 
 	if select_type == 'all':
-		infos = device_broken.objects.filter(status=0)
+		infos = device_broken.objects.filter()
 	elif select_type == "netid":
 		u = User.objects.get(username=condition)
-		infos = device_broken.objects.filter(applicant=u,status=0)
+		infos = device_broken.objects.filter(applicant=u)
 
 	infos_count = infos.count()
 	infos = infos[pageSize*(pageIndex-1):pageSize*pageIndex]
@@ -810,6 +832,7 @@ def device_broken_info(request):
 		context['device_name'] = info.device.device_name
 		context['detail'] = info.detail
 		context['date'] = info.submit_time
+		context['status_operate']={'status':info.status,'operate':info.pk}
 		context['operate'] = info.pk
 		applys.append(context)
 
