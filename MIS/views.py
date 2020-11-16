@@ -1570,7 +1570,7 @@ def apply_classroom(request):
 	teach = User.objects.get(username = responsible_teacher)
 	date = date.split('-')
 	day = timezone.datetime.today().date()
-	day.replace(year = int(date[0]), month = int(date[1]), day = int(date[2]))
+	day = day.replace(year = int(date[0]), month = int(date[1]), day = int(date[2]))
 	r_teacher = teacher.objects.get(user = teach)
 	size = int(size)
 	category = int(category)
