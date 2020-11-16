@@ -121,7 +121,7 @@ class curriculum(models.Model):
 	section_begin = models.IntegerField(null=False) 								#开始节数
 	section_end = models.IntegerField(null=False)									#结束节数
 	week_day =  models.IntegerField(null=False)										#周几上课
-	academy = models.ForeignKey(academy,on_delete=models.DO_NOTHING,related_name='curriculum_academy')				#所属学院
+	academy_id = models.ForeignKey(academy,on_delete=models.DO_NOTHING,related_name='curriculum_academy')				#所属学院
 	
 
 class device_broken(models.Model):
