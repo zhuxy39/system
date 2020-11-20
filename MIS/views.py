@@ -54,7 +54,13 @@ def homepage(request):
 	if request.user.is_authenticated:
 		if request.user.is_superuser:
 			#返回管理员首页
-			return render(request,'work/index.html')
+			context = {}
+			user_info = {}
+			user = request.user
+			user_info['is_superuser'] = user.is_superuser
+			user_info['is_staff'] = user.is_staff
+			context['user_info'] = user_info
+			return render(request,'work/index.html',context)
 		else:
 			#返回用户首页
 			context = {}

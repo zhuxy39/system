@@ -296,96 +296,12 @@
                 }
             })
             return reval;
-        },
-        loadMenu: function () {
-            var data = [{ "F_ModuleId": "1", "F_ParentId": "0", "F_EnCode": "SysManage", "F_FullName": "用户管理", "F_Icon": "fa fa-list", "F_UrlAddress": "/default", "F_Target": "expand", "F_IsMenu": 0, "F_AllowExpand": 1, "F_IsPublic": 0, "F_AllowEdit": null, "F_AllowDelete": null, "F_SortCode": 1, "F_DeleteMark": 0, "F_EnabledMark": 1, "F_Description": null, "F_CreateDate": null, "F_CreateUserId": null, "F_CreateUserName": null, "F_ModifyDate": "2015-11-17 11:22:46", "F_ModifyUserId": "System", "F_ModifyUserName": "超级管理员" },
-                { "F_ModuleId": "11", "F_ParentId": "1", "F_EnCode": "OrganizeManage", "F_FullName": "学生列表", "F_Icon": "", "F_UrlAddress": "/student-list/", "F_Target": "iframe", "F_IsMenu": 0, "F_AllowExpand": 1, "F_IsPublic": 0, "F_AllowEdit": null, "F_AllowDelete": null, "F_SortCode": 1, "F_DeleteMark": 0, "F_EnabledMark": 1, "F_Description": null, "F_CreateDate": null, "F_CreateUserId": null, "F_CreateUserName": null, "F_ModifyDate": "2015-11-17 11:22:46", "F_ModifyUserId": "System", "F_ModifyUserName": "超级管理员" },
-                { "F_ModuleId": "12", "F_ParentId": "1", "F_EnCode": "OrganizeManage", "F_FullName": "教师列表", "F_Icon": "", "F_UrlAddress": "/teacher-list/", "F_Target": "iframe", "F_IsMenu": 0, "F_AllowExpand": 1, "F_IsPublic": 0, "F_AllowEdit": null, "F_AllowDelete": null, "F_SortCode": 1, "F_DeleteMark": 0, "F_EnabledMark": 1, "F_Description": null, "F_CreateDate": null, "F_CreateUserId": null, "F_CreateUserName": null, "F_ModifyDate": "2015-11-17 11:22:46", "F_ModifyUserId": "System", "F_ModifyUserName": "超级管理员" },
-                { "F_ModuleId": "6", "F_ParentId": "0", "F_EnCode": "SysManage", "F_FullName": "设备管理", "F_Icon": "fa fa-cog", "F_UrlAddress": "/default", "F_Target": "expand", "F_IsMenu": 0, "F_AllowExpand": 1, "F_IsPublic": 0, "F_AllowEdit": null, "F_AllowDelete": null, "F_SortCode": 1, "F_DeleteMark": 0, "F_EnabledMark": 1, "F_Description": null, "F_CreateDate": null, "F_CreateUserId": null, "F_CreateUserName": null, "F_ModifyDate": "2015-11-17 11:22:46", "F_ModifyUserId": "System", "F_ModifyUserName": "超级管理员" },
-                { "F_ModuleId": "61", "F_ParentId": "6", "F_EnCode": "OrganizeManage", "F_FullName": "设备信息列表", "F_Icon": "", "F_UrlAddress": "/device-list/", "F_Target": "iframe", "F_IsMenu": 1, "F_AllowExpand": 1, "F_IsPublic": 0, "F_AllowEdit": null, "F_AllowDelete": null, "F_SortCode": 1, "F_DeleteMark": 0, "F_EnabledMark": 1, "F_Description": null, "F_CreateDate": null, "F_CreateUserId": null, "F_CreateUserName": null, "F_ModifyDate": "2016-04-29 11:55:28", "F_ModifyUserId": "System", "F_ModifyUserName": "超级管理员" },
-                // { "F_ModuleId": "62", "F_ParentId": "6", "F_EnCode": "OrganizeManage", "F_FullName": "设备申请列表", "F_Icon": "", "F_UrlAddress": "/device_apply/", "F_Target": "iframe", "F_IsMenu": 1, "F_AllowExpand": 1, "F_IsPublic": 0, "F_AllowEdit": null, "F_AllowDelete": null, "F_SortCode": 1, "F_DeleteMark": 0, "F_EnabledMark": 1, "F_Description": null, "F_CreateDate": null, "F_CreateUserId": null, "F_CreateUserName": null, "F_ModifyDate": "2016-04-29 11:55:28", "F_ModifyUserId": "System", "F_ModifyUserName": "超级管理员" },
-                { "F_ModuleId": "62", "F_ParentId": "6", "F_EnCode": "OrganizeManage", "F_FullName": "设备故障处理", "F_Icon": "", "F_UrlAddress": "/device_broken/", "F_Target": "iframe", "F_IsMenu": 1, "F_AllowExpand": 1, "F_IsPublic": 0, "F_AllowEdit": null, "F_AllowDelete": null, "F_SortCode": 1, "F_DeleteMark": 0, "F_EnabledMark": 1, "F_Description": null, "F_CreateDate": null, "F_CreateUserId": null, "F_CreateUserName": null, "F_ModifyDate": "2016-04-29 11:55:28", "F_ModifyUserId": "System", "F_ModifyUserName": "超级管理员" },
-                // { "F_ModuleId": "62", "F_ParentId": "6", "F_EnCode": "OrganizeManage", "F_FullName": "设备申请记录", "F_Icon": "", "F_UrlAddress": "/device_apply_record/", "F_Target": "iframe", "F_IsMenu": 1, "F_AllowExpand": 1, "F_IsPublic": 0, "F_AllowEdit": null, "F_AllowDelete": null, "F_SortCode": 1, "F_DeleteMark": 0, "F_EnabledMark": 1, "F_Description": null, "F_CreateDate": null, "F_CreateUserId": null, "F_CreateUserName": null, "F_ModifyDate": "2016-04-29 11:55:28", "F_ModifyUserId": "System", "F_ModifyUserName": "超级管理员" },
-                { "F_ModuleId": "9", "F_ParentId": "0", "F_EnCode": "SysManage", "F_FullName": "课室管理", "F_Icon": "fa fa-folder-open-o", "F_UrlAddress": "/default", "F_Target": "expand", "F_IsMenu": 0, "F_AllowExpand": 1, "F_IsPublic": 0, "F_AllowEdit": null, "F_AllowDelete": null, "F_SortCode": 1, "F_DeleteMark": 0, "F_EnabledMark": 1, "F_Description": null, "F_CreateDate": null, "F_CreateUserId": null, "F_CreateUserName": null, "F_ModifyDate": "2015-11-17 11:22:46", "F_ModifyUserId": "System", "F_ModifyUserName": "超级管理员" },
-                { "F_ModuleId": "91", "F_ParentId": "9", "F_EnCode": "OrganizeManage", "F_FullName": "课室状态查询", "F_Icon": "", "F_UrlAddress": "/classroom-list/", "F_Target": "iframe", "F_IsMenu": 1, "F_AllowExpand": 1, "F_IsPublic": 0, "F_AllowEdit": null, "F_AllowDelete": null, "F_SortCode": 1, "F_DeleteMark": 0, "F_EnabledMark": 1, "F_Description": null, "F_CreateDate": null, "F_CreateUserId": null, "F_CreateUserName": null, "F_ModifyDate": "2016-04-29 11:55:28", "F_ModifyUserId": "System", "F_ModifyUserName": "超级管理员" },
-                { "F_ModuleId": "92", "F_ParentId": "9", "F_EnCode": "OrganizeManage", "F_FullName": "课室申请管理", "F_Icon": "", "F_UrlAddress": "/classroom-apply-1/", "F_Target": "iframe", "F_IsMenu": 1, "F_AllowExpand": 1, "F_IsPublic": 0, "F_AllowEdit": null, "F_AllowDelete": null, "F_SortCode": 1, "F_DeleteMark": 0, "F_EnabledMark": 1, "F_Description": null, "F_CreateDate": null, "F_CreateUserId": null, "F_CreateUserName": null, "F_ModifyDate": "2016-04-29 11:55:28", "F_ModifyUserId": "System", "F_ModifyUserName": "超级管理员" },
-                // { "F_ModuleId": "93", "F_ParentId": "9", "F_EnCode": "OrganizeManage", "F_FullName": "课室申请复审管理", "F_Icon": "", "F_UrlAddress": "/classroom-apply-2/", "F_Target": "iframe", "F_IsMenu": 1, "F_AllowExpand": 1, "F_IsPublic": 0, "F_AllowEdit": null, "F_AllowDelete": null, "F_SortCode": 1, "F_DeleteMark": 0, "F_EnabledMark": 1, "F_Description": null, "F_CreateDate": null, "F_CreateUserId": null, "F_CreateUserName": null, "F_ModifyDate": "2016-04-29 11:55:28", "F_ModifyUserId": "System", "F_ModifyUserName": "超级管理员" },
-                { "F_ModuleId": "94", "F_ParentId": "9", "F_EnCode": "OrganizeManage", "F_FullName": "课室申请记录查询", "F_Icon": "", "F_UrlAddress": "/classroom-apply-record/", "F_Target": "iframe", "F_IsMenu": 1, "F_AllowExpand": 1, "F_IsPublic": 0, "F_AllowEdit": null, "F_AllowDelete": null, "F_SortCode": 1, "F_DeleteMark": 0, "F_EnabledMark": 1, "F_Description": null, "F_CreateDate": null, "F_CreateUserId": null, "F_CreateUserName": null, "F_ModifyDate": "2016-04-29 11:55:28", "F_ModifyUserId": "System", "F_ModifyUserName": "超级管理员" },
-			];
-            var _html = "";
-            $.each(data, function (i) { 
-                var row = data[i];
-                if (row.F_ParentId == "0") {
-                    if (i == 0) {
-                        _html += '<li class="treeview active">';
-                    } else {
-                        _html += '<li class="treeview">';
-                    }
-                    _html += '<a href="#">'
-                    _html += '<i class="' + row.F_Icon + '"></i><span>' + row.F_FullName + '</span><i class="fa fa-angle-left pull-right"></i>'
-                    _html += '</a>'
-                    var childNodes = $.learunindex.jsonWhere(data, function (v) { return v.F_ParentId == row.F_ModuleId });
-                    if (childNodes.length > 0) {
-                        _html += '<ul class="treeview-menu">';
-                        $.each(childNodes, function (i) {
-                            var subrow = childNodes[i];
-                            var subchildNodes = $.learunindex.jsonWhere(data, function (v) { return v.F_ParentId == subrow.F_ModuleId });
-                            _html += '<li>';
-                            if (subchildNodes.length > 0) {
-                                _html += '<a href="#"><i class="' + subrow.F_Icon + '"></i>' + subrow.F_FullName + '';
-                                _html += '<i class="fa fa-angle-left pull-right"></i></a>';
-                                _html += '<ul class="treeview-menu">';
-                                $.each(subchildNodes, function (i) {
-                                    var subchildNodesrow = subchildNodes[i];
-                                    _html += '<li><a class="menuItem" data-id="' + subrow.F_ModuleId + '" href="' + subrow.F_UrlAddress + '"><i class="' + subchildNodesrow.F_Icon + '"></i>' + subchildNodesrow.F_FullName + '</a></li>';
-                                });
-                                _html += '</ul>';
-
-                            } else {
-                                _html += '<a class="menuItem" data-id="' + subrow.F_ModuleId + '" href="' + subrow.F_UrlAddress + '"><i class="' + subrow.F_Icon + '"></i>' + subrow.F_FullName + '</a>';
-                            }
-                            _html += '</li>';
-                        });
-                        _html += '</ul>';
-                    }
-                    _html += '</li>'
-                }
-            });
-            $("#sidebar-menu").append(_html);
-            $("#sidebar-menu li a").click(function () {
-                var d = $(this), e = d.next();
-                if (e.is(".treeview-menu") && e.is(":visible")) {
-                    e.slideUp(500, function () {
-                        e.removeClass("menu-open")
-                    }),
-                    e.parent("li").removeClass("active")
-                } else if (e.is(".treeview-menu") && !e.is(":visible")) {
-                    var f = d.parents("ul").first(),
-                    g = f.find("ul:visible").slideUp(500);
-                    g.removeClass("menu-open");
-                    var h = d.parent("li");
-                    e.slideDown(500, function () {
-                        e.addClass("menu-open"),
-                        f.find("li.active").removeClass("active"),
-                        h.addClass("active");
-
-                        var _height1 = $(window).height() - $("#sidebar-menu >li.active").position().top - 41;
-                        var _height2 = $("#sidebar-menu li > ul.menu-open").height() + 10
-                        if (_height2 > _height1) {
-                            $("#sidebar-menu >li > ul.menu-open").css({
-                                overflow: "auto",
-                                height: _height1
-                            })
-                        }
-                    })
-                }
-                e.is(".treeview-menu");
-            });
         }
+
     };
     $(function () {
         $.learunindex.load();
-        $.learunindex.loadMenu();
+        // $.learunindex.loadMenu();
         $.learuntab.init();
     });
 })(jQuery);
