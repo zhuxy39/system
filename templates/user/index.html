@@ -195,26 +195,26 @@
                                     <li class="col-12" style="border-top:2px solid #eceeef">
                                         <div class="comment-action">
                                             <h5 class="c_name">
-                                                传达精神 部署工作 开启业务培训 ——中心顺利召开全员大会
+                                                <a  href="http://news2.sysu.edu.cn/news01/1383143.htm" style="color:black">我校召开2020年本科教学工作培训会议</a>
                                             </h5>
                                             <p class="c_msg m-b-0">
-                                                为统一思想，提前谋划，我中心在第三教学楼213组织召开了中心全员大会。
+                                                我校本科教学工作培训会议日前在广州校区南校园怀士堂举行.
                                             </p>
                                             <small class="comment-date float-sm-right">
-                                                2019-06-16
+                                                2020-11-21
                                             </small>
                                         </div>
                                     </li>
                                     <li class="col-12" style="border-top:2px solid #eceeef">
                                             <div class="comment-action">
                                                 <h5 class="c_name">
-                                                    教务部召开全体大会传达学习学校2019年春季工作会议精神
-                                                </h5>
+                                                    <a href="http://news2.sysu.edu.cn/news01/1383141.htm" style="color:black">附属第三医院肝脏外科牵头成立“华南劈离式肝移植联盟”</a>
+</h5>
                                                 <p class="c_msg m-b-0">
-                                                    4月24日上午，教务部召开全体大会，传达学习学校2019年春季工作会议精神。
+                                                    华南劈离式肝移植联盟”启动会议在广州召开.
                                                 </p>
                                                 <small class="comment-date float-sm-right">
-                                                    2019-06-15
+                                                    2020-11-21
                                                 </small>
                                             </div>
                                         </li>
@@ -527,7 +527,7 @@
                     $("#centralTable").on("click", ":button", function(event){
                         var t = $(this).attr("id");
 
-                        if(obj[t].apply_status==2){
+                        if(obj[t].apply_status==2||obj[t].apply_status==1){
                             str1='<div class="crilcDiv"><div class="cricleBox yesClice">&radic;</div><div class="cricleText greenColor">提交申请</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
                                 +'<div class="crilcDiv"><div class="cricleBox yesClice">&radic;</div><div class="cricleText greenColor">教务部审核</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
                                 +'<div class="crilcDiv"><div class="cricleBox yesClice">&radic;</div><div class="cricleText greenColor">办结</div></div>';
@@ -536,16 +536,6 @@
                             result4='<span class="marginR greenColor">课室申请完成</span><span class="drakColor">'+'</span>'
                         }
                        
-                        
-                        else if (obj[t].apply_status==1){
-                            str1='<div class="crilcDiv"><div class="cricleBox yesClice">&radic;</div><div class="cricleText greenColor">提交申请</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
-                                +'<div class="crilcDiv"><div class="cricleBox noClice">&times;</div><div class="cricleText darkColor">教务部审核</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
-                                +'<div class="crilcDiv"><div class="cricleBox noClice">&times;</div><div class="cricleText darkColor">办结</div></div>';
-                            result1='<span class="marginR greenColor">课室申请提交成功</span><span class="drakColor">'+'</span>';
-                            result3='<span class="marginR redColor">教务部处理中</span><span class="drakColor"></span>';
-                            result4='<span class="marginR redColor">课室申请中</span><span class="drakColor">/span>';
-
-                        }
                         
                         else if (obj[t].apply_status==0){
                             str1='<div class="crilcDiv"><div class="cricleBox yesClice">&radic;</div><div class="cricleText greenColor">提交申请</div></div><div class="lineDiv"><div class="greeLine"></div></div>'
