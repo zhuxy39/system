@@ -146,7 +146,7 @@
 							<!-- <div class="col-lg-4 col-md-6 col-sm-12"><b>申请负责老师</b>
                                 <select id="teachers" class="form-control show-tick" required>
                                 </select>
-								
+
                             </div> -->
                         </div>
                         <h2 class="card-inside-title">申请活动信息</h2>
@@ -229,7 +229,6 @@
 //载入用户信息
     {% autoescape off %}
     var user_info = {{ user_info }};
-    console.log(user_info)
     $("#applicant").val(user_info.name);
     $("#email").val(user_info.email);
     var teachers = {{ academy_teachers }};
@@ -258,6 +257,7 @@
         var size = $("#size option:selected").attr("value");
         var type = $("#type option:selected").attr("value");
         var reason = $("#apply_reason").val();
+        responsible_teacher=123;
         if(start && end && date && size && reason && responsible_teacher){
             $.ajax({
                 type:"post",
