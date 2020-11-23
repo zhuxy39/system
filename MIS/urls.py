@@ -102,7 +102,7 @@ urlpatterns = [
     path('submit_device_apply/',views.submit_device_apply,name='submit_device_apply'),
     path('device_record/',views.device_record,name='device_record'),
     path('get_device_apply_info/',views.get_device_apply_info,name='get_device_apply_info'),
-    path('application/',views.Application,name='application'),
+    path('application/',views.apply_classroom_page, name = 'apply_classroom_page'),
 
     path('search_classroom/', views.search_classroom, name = 'search_classroom'),
     path('search_classroom_page/', views.search_classroom_page, name = 'search_classroom_page'),
