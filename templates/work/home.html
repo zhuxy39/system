@@ -4,6 +4,45 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>后台管理系统</title>
+    <style type="text/css">
+		.one {
+			position: absolute;
+			width: 680px;
+			height: 300px;
+			overflow: hidden;
+		}
+		.one_cantent img {
+			width: 680px;
+			height: 300px;
+			float: left;
+		}
+		.one_cantent {
+			width: 3000px;
+			height: 300px;
+			position: absolute;
+			left: 0px;
+			animation-name: move;
+			animation-duration: 15s;
+			animation-iteration-count: infinite;
+		}
+		@keyframes move {
+			0% {
+				left: 0px;
+			}
+			25% {
+				left: -680px;
+			}
+			50% {
+				left: -1360px;
+			}
+			75% {
+				left: -2040px;
+			}
+			100% {
+				left: -2720px
+			}
+		}
+	</style>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="/static/work/js/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/work/css/font-awesome.min.css">
@@ -45,7 +84,7 @@
         function Canvas2() {
             var randomScalingFactor = function () { return Math.round(Math.random() * 100) };
             var lineChartData = {
-                labels: ["1月", "2月", "3月", "4月", "5月", ],
+                labels: ["7月", "8月", "9月", "10月", "11月", ],
                 datasets: [
                     {
                         fillColor: "rgba(220,220,220,0.2)",
@@ -67,67 +106,21 @@
 </head>
 <body>
     <div id="areascontent">
-        <div class="rows" style="margin-bottom: 0.8%; overflow: hidden;">
-            <div style="float: left; width: 61%;">
+        <div class="rows" style="margin-bottom: 1.8%; overflow: hidden;">
+            <div style="float: left; width: 41%;">
                 <div style="height: 300px; border: 1px solid #e6e6e6; overflow: hidden;">
-                    <div class="dashboard-stats" style="width: 33%">
-                        <div class="dashboard-stats-item" style="background-color: #44b6ae; height: 144px">
-                            <h2 class="m-top-none">20<span>件</span></h2>
-                            <h5>待处理课室初审</h5>
-                            <div class="stat-icon">
-                                <i class="fa fa-file-text-o"></i>
-                            </div>
+                    <div class="one">
+                        <div class="one_cantent">
+                            <img src="/static/img/1.jpg">
+                            <img src="/static/img/2.jpg">
+                            <img src="/static/img/3.jpg">
+                            <img src="/static/img/4.png">
+                            <img src="/static/img/5.jpg">
                         </div>
-                    </div>
-                    <div class="dashboard-stats" style="width: 33%">
-                        <div class="dashboard-stats-item" style="background-color: #8775a7; height: 144px">
-                            <h2 class="m-top-none">6<span>件</span></h2>
-                            <h5>待处理课室复审</h5>
-                            <div class="stat-icon">
-                                <i class="fa fa-file-text-o"></i>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <div class="dashboard-stats" style="width: 33%">
-                        <div class="dashboard-stats-item" style="background-color: #4f5c65;  margin-right: -25px; height: 144px">
-                            <h2 class="m-top-none">4<span>件</span></h2>
-                            <h5>课室申请取消数</h5>
-                            <div class="stat-icon">
-                                <i class="fa fa-file-text-o"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dashboard-stats" style="width: 33%">
-                        <div class="dashboard-stats-item" style="background-color: #14aae4; margin-bottom: 0px; height: 144px">
-                            <h2 class="m-top-none">5<span>件</span></h2>
-                            <h5>待处理设备故障</h5>
-                            <div class="stat-icon">
-                                <i class="fa fa-file-text-o"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dashboard-stats" style="width: 33%">
-                        <div class="dashboard-stats-item" style="background-color: #949FB1; margin-bottom: 0px; height: 144px">
-                            <h2 class="m-top-none">3<span>件</span></h2>
-                            <h5>多媒体申请初审</h5>
-                            <div class="stat-icon">
-                                <i class="fa fa-file-text-o"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dashboard-stats" style="width: 33%">
-                        <div class="dashboard-stats-item" style="background-color: #f29503; margin-right: -25px; margin-bottom: 0px; height: 144px">
-                            <h2 class="m-top-none">6<span>件</span></h2>
-                            <h5>多媒体申请复审</h5>
-                            <div class="stat-icon">
-                                <i class="fa fa-file-text-o"></i>
-                            </div>
-                        </div>
-                    </div>
+                    </div>  
                 </div>
             </div>
-            <div style="float: right; width: 38.2%;">
+            <div style="float: right; width: 57.2%;">
                 <div style="height: 300px; border: 1px solid #e6e6e6; background-color: #fff;">
                     <div class="panel panel-default">
                         <div class="panel-heading"><i class="fa fa-area-chart fa-lg" style="padding-right: 5px;"></i>近五月课室申请统计</div>
@@ -145,15 +138,15 @@
                         <div class="panel-heading"><i class="fa fa-rss fa-lg" style="padding-right: 5px;"></i>通知公告</div>
                         <div class="panel-body">
                             <ul>
-                                <li><a href="javascript:void(0)">【通知】春季学期课室申请通知</a><span class="time">2016-07-21</span></li>
-                                <li><a href="javascript:void(0)">【公告】春季学期课室申请通知</a><span class="time">2016-07-21</span></li>
-                                <li><a href="javascript:void(0)">【公告】春季学期课室申请通知</a><span class="time">2016-07-21</span></li>
-                                <li><a href="javascript:void(0)">【通知】春季学期课室申请通知</a><span class="time">2016-07-21</span></li>
-                                <li><a href="javascript:void(0)">【通知】春季学期课室申请通知</a><span class="time">2016-07-21</span></li>
-                                <li><a href="javascript:void(0)">【通知】春季学期课室申请通知</a><span class="time">2016-07-21</span></li>
-                                <li><a href="javascript:void(0)">【公告】春季学期课室申请通知</a><span class="time">2016-07-21</span></li>
-                                <li><a href="javascript:void(0)">【公告】春季学期课室申请通知</a><span class="time">2016-07-21</span></li>
-                                <li><a href="javascript:void(0)">【公告】春季学期课室申请通知</a><span class="time">2016-07-21</span></li>
+                                <li><a href="javascript:void(0)">【通知】秋季学期课室申请通知</a><span class="time">2020-11-21</span></li>
+                                <li><a href="javascript:void(0)">【公告】秋季学期课室申请通知</a><span class="time">2020-11-21</span></li>
+                                <li><a href="javascript:void(0)">【公告】秋季学期课室申请通知</a><span class="time">2020-11-21</span></li>
+                                <li><a href="javascript:void(0)">【通知】秋季学期课室申请通知</a><span class="time">2020-11-21</span></li>
+                                <li><a href="javascript:void(0)">【通知】秋季学期课室申请通知</a><span class="time">2020-11-21</span></li>
+                                <li><a href="javascript:void(0)">【通知】秋季学期课室申请通知</a><span class="time">2020-11-21</span></li>
+                                <li><a href="javascript:void(0)">【公告】秋季学期课室申请通知</a><span class="time">2020-11-21</span></li>
+                                <li><a href="javascript:void(0)">【公告】秋季学期课室申请通知</a><span class="time">2020-11-21</span></li>
+                                <li><a href="javascript:void(0)">【公告】秋季学期课室申请通知</a><span class="time">2020-11-21</span></li>
                             </ul>
                         </div>
                     </div>
