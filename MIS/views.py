@@ -483,9 +483,11 @@ def device_info(request):
 	
 	pageSize = int(request.GET.get('pageSize',None))	#获取每页大小
 	pageIndex = int(request.GET.get('pageIndex',None))	#获取页码
-	select_type = request.GET.get('select_type',None)	#获取选择类型
+	select_type = 'all'	#获取选择类型
 	status = int(request.GET.get('status',None))		#获取选择的设备状态参数
-
+	id = request.GET.get('id',None)		#获取选择的id参数	
+	name = request.GET.get('name',None)		#获取选择的name参数
+	type = request.GET.get('type',None)		#获取选择的type参数
 	if select_type == 'all':
 		if status == 2:
 			#检索出所有设备信息
@@ -496,33 +498,16 @@ def device_info(request):
 		else:
 			#检索出所有不可用的设备信息
 			device_infos = device.objects.filter(status=False)
-	elif select_type == 'id':
-		#检索出指定设备编号的设备信息
-		id = request.GET.get('id')
-		if status == 2:
-			device_infos = device.objects.filter(pk=id)
-		elif status == 1:
-			device_infos = device.objects.filter(pk=id,status=True)
-		else:
-			device_infos = device.objects.filter(pk=id,status=False)
-	elif select_type == 'name':
-		#检索出指定设备名称的设备信息
-		name = request.GET.get('name')
-		if status == 2:
-			device_infos = device.objects.filter(device_name=name)
-		elif status == 1:
-			device_infos = device.objects.filter(device_name=name,status=True)
-		else:
-			device_infos = device.objects.filter(device_name=name,status=False)
-	else:
-		#检索出指定设备类型的设备信息
-		type = int(request.GET.get('type'))
-		if status == 2:
-			device_infos = device.objects.filter(device_type=type)
-		elif status == 1:
-			device_infos = device.objects.filter(device_type=type,status=True)
-		else:
-			device_infos = device.objects.filter(device_type=type,status=False)
+		if id != '':
+			#检索出筛选id后的设备信息
+			device_infos = device_infos.filter(pk=id)		
+		if type != '-1':
+			#检索出筛选type后的设备信息
+			device_infos = device_infos.filter(device_type=type)			
+		if name!= '全部':
+			#检索出筛选name后的设备信息
+			device_infos = device_infos.filter(device_name=name)
+
 
 	device_infos_count = device_infos.count()	#符合条件的设备数量
 	device_infos = device_infos[pageSize*(pageIndex-1):pageSize*pageIndex]	#指定也页码的设备记录
