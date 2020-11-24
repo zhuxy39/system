@@ -1,48 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>后台管理系统</title>
-    <style type="text/css">
-		.one {
-			position: absolute;
-			width: 680px;
-			height: 300px;
-			overflow: hidden;
-		}
-		.one_cantent img {
-			width: 680px;
-			height: 300px;
-			float: left;
-		}
-		.one_cantent {
-			width: 3000px;
-			height: 300px;
-			position: absolute;
-			left: 0px;
-			animation-name: move;
-			animation-duration: 15s;
-			animation-iteration-count: infinite;
-		}
-		@keyframes move {
-			0% {
-				left: 0px;
-			}
-			25% {
-				left: -680px;
-			}
-			50% {
-				left: -1360px;
-			}
-			75% {
-				left: -2040px;
-			}
-			100% {
-				left: -2720px
-			}
-		}
-	</style>
+
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="/static/work/js/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/work/css/font-awesome.min.css">
@@ -107,29 +69,60 @@
 <body>
     <div id="areascontent">
         <div class="rows" style="margin-bottom: 1.8%; overflow: hidden;">
-            <div style="float: left; width: 41%;">
-                <div style="height: 300px; border: 1px solid #e6e6e6; overflow: hidden;">
-                    <div class="one">
-                        <div class="one_cantent">
-                            <img src="/static/img/1.jpg">
-                            <img src="/static/img/2.jpg">
-                            <img src="/static/img/3.jpg">
-                            <img src="/static/img/4.png">
-                            <img src="/static/img/5.jpg">
-                        </div>
-                    </div>  
-                </div>
-            </div>
-            <div style="float: right; width: 57.2%;">
+            <div style="float: left; width: 61%;">
                 <div style="height: 300px; border: 1px solid #e6e6e6; background-color: #fff;">
                     <div class="panel panel-default">
                         <div class="panel-heading"><i class="fa fa-area-chart fa-lg" style="padding-right: 5px;"></i>近五月课室申请统计</div>
-                        <div class="panel-body">
-                            <canvas id="Canvas2" style="height: 240px; width: 100%;"></canvas>
+                        <div class="panel-body" style="text-align:center;margin:0 auto">
+                            <canvas id="Canvas2" style="text-align:center;height: 240px; width: 100%;"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
+            <div style="float: right; width: 38.2%;">
+                <div style="height: 300px; border: 0px solid #e6e6e6;">
+                    <div class="one">
+                        <div class="one_cantent">
+                            <div style="position:absolute;z-index:1;height:300px;width:38.2%"><img class="img-slide" style="height:300px;width:100%;opacity:1;" src="/static/img/1.jpg"></div>
+                            <div style="position:absolute;z-index:2;height:300px;width:38.2%"><img class="img-slide" style="height:300px;width:100%;opacity:0;" src="/static/img/2.jpg"></div>
+                            <div style="position:absolute;z-index:3;height:300px;width:38.2%"><img class="img-slide" style="height:300px;width:100%;opacity:0;" src="/static/img/3.jpg"></div>
+                            <div style="position:absolute;z-index:4;height:300px;width:38.2%"><img class="img-slide" style="height:300px;width:100%;opacity:0;" src="/static/img/4.png"></div>
+                            <div style="position:absolute;z-index:5;height:300px;width:38.2%"><img class="img-slide" style="height:300px;width:100%;opacity:0;" src="/static/img/5.jpg"></div>
+
+                            </div>
+                    </div>  
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                var index = 0;
+                var index1 = 1;
+                //改变图片
+                function ChangeImg() {
+                    index1++;
+                    if (index1 == 200) {
+                        index++;
+                        index1 = 1;
+                    }
+                    var a = document.getElementsByClassName("img-slide");
+                    if (index >= a.length) index = 0;
+                    for (var i = 0; i < a.length; i++) {
+                        a[i].style.opacity = 0;
+                    }
+                    if (index < 100) {
+                        a[index].style.opacity = (100 - index1) / 100;
+                        a[(index + 1) % 5].style.opacity = (index1) / 100;
+                    }
+                    else {
+                        a[index].style.opacity = 0;
+                        a[(index + 1) % 5].style.opacity = 1;
+                    }
+
+                }
+                //设置定时器，每隔两秒切换一张图片
+                setInterval(ChangeImg, 30);
+            </script>
+
         </div>
         <div class="rows" style="margin-bottom: 0.8%; overflow: hidden;">
             <div style="float: left; width: 61%;">
